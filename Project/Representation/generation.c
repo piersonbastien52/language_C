@@ -1,31 +1,4 @@
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include "styles.c"
-#include "rectangle.h"
-#include "circle.h"
-#include "ellipse.h"
-#include "line.h"
-#include "square.h"
-
-typedef struct Polylines_s Polylines_t;
-
-struct Polylines_s
-{
-
-  Polylines_t *next;
-  unsigned int x;
-  unsigned int y;
-};
-
-typedef struct List_polylines_s
-{
-
-  Polylines_t *start;
-  unsigned int length;
-
-} List_polylines_t;
+#include "h.h"
 
 List_polylines_t *add_node(List_polylines_t *chain, Polylines_t *link)
 {
@@ -164,6 +137,7 @@ Landmark_t *add_node(Landmark_t *chain, List_shape_t *link)
   }
 
   temp->next = link;
+  link->previous = temp;
   chain->length++;
   return chain;
 }
@@ -200,7 +174,7 @@ int supp_node(Landmark_t *chain, unsigned int index) // supression d'un maillon 
   if (previous == NULL)
   {
 
-    chain->start == next;
+    chain->start = next;
 
     if (next != NULL)
       next->previous = NULL;
@@ -221,7 +195,7 @@ int supp_node(Landmark_t *chain, unsigned int index) // supression d'un maillon 
   free_node(current);
 
   chain->length--;
-  return chain;
+  return 1;
 }
 
 int main(void)
@@ -242,3 +216,5 @@ int main(void)
 
   return EXIT_SUCCESS;
 }
+
+// idée de con : dépalcer les maillons arrière plan, premier plan
