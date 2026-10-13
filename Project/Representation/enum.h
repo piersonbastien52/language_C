@@ -4,13 +4,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include "Representation/styles.h"
-#include "Representation/rectangle.h"
-#include "Representation/circle.h"
-#include "Representation/ellipse.h"
-#include "Representation/line.h"
-#include "Representation/square.h"
-#include "Representation/polylines.h"
+#include "styles.h"
+#include "rectangle.h"
+#include "circle.h"
+#include "ellipse.h"
+#include "line.h"
+#include "square.h"
+#include "polylines.h"
 
 typedef enum
 {
