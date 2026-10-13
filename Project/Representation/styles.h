@@ -1,4 +1,5 @@
-#include "project.h"
+#ifndef STYLE_H
+#define STYLE_H
 
 typedef struct Styles_t
 {
@@ -13,3 +14,5 @@ typedef struct Styles_t
   // il manque l'effet mirroir
 
 } Styles_s;
+
+#endif
