@@ -1,4 +1,4 @@
-#include "h.h"
+#include "project.h"
 
 int create(void);
 int editing(void);
@@ -39,6 +39,8 @@ int menu(int user_input)
             case 5:
                 return 0;
                 break;
+            default:
+                break;
             };
         }
         else
@@ -59,43 +61,42 @@ int create(void)
     printf("4.Ellipse\n");
     printf("5.Line\n");
     printf("6.Polyline\n");
-    printf("7.retour\n"); // ATTENTION, implémenter le retour arrière
+    printf("7.retour\n");
     printf("Enter your choice (1-7): \n");
-    scanf("%d", &choice);
-    if (choice > 7 || choice == NULL)
-    {
-        return ("wrong input number");
-    }
-    if (choice == 7)
-        ;
-    {
-        return main;
-    }
-    int num1, num 2 switch (choice)
-    {
-    case 1:
-        printf("Entrez la valeur de \"x\"");
-        scanf("%d", num1);
-        printf("Entrez la valeur de \"y\"");
-        scanf("%d", num2);
-        ;
-        break;
 
-    case 2:;
-        break;
-    case 3:;
-        break;
-    case 4:;
-        break;
-    case 5:;
-        break;
-    case 6:;
-        break;
-    default:;
-        break;
+    while (1)
+    {
+        scanf("%d", user_input);
+        if (user_input >= 1 && user_input <= 5)
+        {
+            switch (user_input)
+            {
+            case 1:
+                input_rectangle;
+                break;
+            case 2:
+                input_square;
+                break;
+            case 3:
+                input_circle;
+                break;
+            case 4:
+                input_ellipse;
+                break;
+            case 5:
+                input_line;
+                break;
+            case 7:
+            input_polylines case 6:
+                menu;
+                break;
+            default:
+                break;
+            };
+        }
+        else
+        {
+            printf("wrong input");
+        };
     }
-}
-
-int coordonates(void)
-{
 }
