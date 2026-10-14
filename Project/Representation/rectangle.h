@@ -3,10 +3,10 @@
 
 typedef struct Rectangle_t
 {
-    unsigned int x;
-    unsigned int y;
-    unsigned int height;
-    unsigned int width;
+    int x;
+    int y;
+    int height;
+    int width;
 } Rectangle_s;
 
 #endif

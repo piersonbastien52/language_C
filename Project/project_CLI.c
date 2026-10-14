@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
 #include "Representation/styles.h"
 #include "Representation/rectangle.h"
 #include "Representation/circle.h"
@@ -24,9 +25,9 @@ void clear_stdin(void)
 
 int menu(void)
 {
-    int choice;
+    unsigned int choice;
     float num1, num2, result;
-    int user_input;
+    unsigned int user_input;
 
     while (1)
     {
@@ -75,21 +76,21 @@ int main(void)
 
 int create(void)
 {
-    int choice;
+    unsigned int choice;
     float num1, num2, result;
-    int user_input;
-
-    printf("1.Rectangle\n");
-    printf("2.Carré\n");
-    printf("3.Cercle\n");
-    printf("4.Ellipse\n");
-    printf("5.Line\n");
-    printf("6.Polyline\n");
-    printf("7.retour\n");
-    printf("Enter your choice (1-7): \n");
+    unsigned int user_input;
 
     while (1)
     {
+        printf("1.Rectangle\n");
+        printf("2.Carré\n");
+        printf("3.Cercle\n");
+        printf("4.Ellipse\n");
+        printf("5.Line\n");
+        printf("6.Polyline\n");
+        printf("7.retour\n");
+        printf("Enter your choice (1-7): \n");
+        clear_stdin();
         scanf("%d", &user_input);
         if (user_input >= 1 && user_input <= 5)
         {
@@ -113,7 +114,7 @@ int create(void)
             case 7:
             // input_polylines
             case 6:
-                menu;
+                menu();
                 break;
             default:
                 break;
@@ -136,9 +137,10 @@ int input_rectangle(Rectangle_s rectangle)
     while (1)
     {
         printf("définir x:\n");
+        clear_stdin();
         scanf("x = %d\n", &temp_x);
 
-        if (temp_x >= 1 && temp_x <= 1000)
+        if (temp_x >= -1000 && temp_x <= 1000)
         {
             rectangle.x = temp_x;
             break;
@@ -146,15 +148,15 @@ int input_rectangle(Rectangle_s rectangle)
         else
         {
             printf("wrong input");
-            temp_x = 2;
         };
     }
     while (1)
     {
         printf("définir y:\n");
+        clear_stdin();
         scanf("y = %d\n", &temp_y);
 
-        if (temp_y >= 1 && temp_y <= 1000)
+        if (temp_y >= -1000 && temp_y <= 1000)
         {
             rectangle.y = temp_y;
             break;
@@ -167,9 +169,10 @@ int input_rectangle(Rectangle_s rectangle)
     while (1)
     {
         printf("définir la hauteur :\n");
+        clear_stdin();
         scanf("hauteur = %d\n", &temp_height);
 
-        if (temp_height >= 1 && temp_height <= 1000)
+        if (temp_height >= -1000 && temp_height <= 1000)
         {
             rectangle.height = temp_height;
             break;
@@ -182,9 +185,10 @@ int input_rectangle(Rectangle_s rectangle)
     while (1)
     {
         printf("définir la largeur :\n");
+        clear_stdin();
         scanf("largeur = %d\n", &temp_width);
 
-        if (temp_width >= 1 && temp_width <= 1000)
+        if (temp_width >= -1000 && temp_width <= 1000)
         {
             rectangle.width = temp_width;
             break;
@@ -194,4 +198,67 @@ int input_rectangle(Rectangle_s rectangle)
             printf("wrong input");
         };
     }
+}
+
+int style_shape(Styles_s style)
+{
+
+    char temp_stroke[20];
+    char temp_fill[20];
+    float temp_stroke_opacity;
+    float temp_fill_opacity;
+    float temp_stroke_width;
+    int temp_tx;
+    int temp_ty;
+    int temp_angle;
+
+    while (1)
+    {
+        printf("définir la couleur du contour en héxadécimal:\n");
+        clear_stdin();
+        printf("contour :");
+        fgets(temp_stroke, sizeof(temp_stroke), stdin);
+        trim(temp_stroke);
+
+        while (temp_stroke[i] != '\0')
+        {
+            clear_stdin();
+
+            if (temp_stroke[0] != '#')
+            {
+                printf("wrong input, missing #");
+            }
+
+            if ((temp_stroke[i] >= '0' && temp_stroke[i] <= '9') ||
+                (temp_stroke[i] >= 'A' && temp_stroke[i] <= 'F') ||
+                (temp_stroke[i] >= 'a' && temp_stroke[i] <= 'f'))
+            {
+                i++;
+            }
+            else
+            {
+                printf("wrong input");
+                break;
+            }
+        }
+    }
+    strcpy(style.stroke, temp_stroke);
+};
+
+int trim(char *sentence)
+{
+    int a = strlen(sentence);
+    int i = 0; // lecture
+    int j = 0; // écriture
+
+    while (sentence[i] != '\0')
+    {
+        if (sentence[i] != ' ')
+        {
+            sentence[j] = sentence[i];
+            j++;
+        }
+        i++;
+    }
+    sentence[j] = '\0';
 }

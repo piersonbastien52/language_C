@@ -6,8 +6,8 @@ typedef struct Polylines_s Polylines_t;
 struct Polylines_s
 {
   Polylines_t *next;
-  unsigned int x;
-  unsigned int y;
+  int x;
+  int y;
 };
 
 typedef struct List_polylines_s

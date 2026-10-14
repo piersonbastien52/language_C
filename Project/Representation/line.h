@@ -3,10 +3,10 @@
 
 typedef struct Line_t
 {
-    unsigned int x1;
-    unsigned int y1;
-    unsigned int x2;
-    unsigned int y2;
+    int x1;
+    int y1;
+    int x2;
+    int y2;
 } Line_s;
 
 #endif

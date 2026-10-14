@@ -3,10 +3,10 @@
 
 typedef struct Ellipse_t
 {
-    unsigned int rx;
-    unsigned int ry;
-    unsigned int cx;
-    unsigned int cy;
+    int rx;
+    int ry;
+    int cx;
+    int cy;
 } Ellipse_s;
 
 #endif

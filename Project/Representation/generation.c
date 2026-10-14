@@ -189,7 +189,7 @@ int main(void)
   struct Styles_t my_style;
 
   FILE *file = fopen("/home/bastien/Documents/Coda_/language_C /Project/Representation/nom_du_fichier.html", "w");
-  fprintf(file, "<svg viewBox=\"0 0 1000 1000\" xmlns=\"http://www.w3.org/2000/svg\">\n");
+  fprintf(file, "<svg viewBox=\"-1000 -1000 2000 2000\" xmlns=\"http://www.w3.org/2000/svg\">\n");
   // modifier le chemin lorsque le dossier de sauvegarde est implémenté
   if (file == NULL)
   {
@@ -202,4 +202,4 @@ int main(void)
   return EXIT_SUCCESS;
 }
 
-// idée de con : dépalcer les maillons arrière plan, premier plan
+// idée de con : déplacer les maillons arrière plan, premier plan

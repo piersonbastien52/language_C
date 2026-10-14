@@ -4,9 +4,9 @@
 typedef struct Square_t
 
 {
-    unsigned int x;
-    unsigned int y;
-    unsigned int height;
+    int x;
+    int y;
+    int height;
 
 } Square_s;
 

@@ -3,9 +3,9 @@
 
 typedef struct Circle_t
 {
-    unsigned int r;
-    unsigned int cx;
-    unsigned int cy;
+    int r;
+    int cx;
+    int cy;
 } Circle_s;
 
 #endif
