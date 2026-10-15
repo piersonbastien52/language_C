@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
+#include "Representation/point.h"
 #include "Representation/styles.h"
 #include "Representation/rectangle.h"
 #include "Representation/circle.h"
@@ -11,17 +12,140 @@
 #include "Representation/polylines.h"
 #include "Representation/enum.h"
 
-int create(void);
-// int editing(void);
-// int charge(void);
-// int visualize(void);
-
 void clear_stdin(void)
 {
     char c = 'a';
     while (c != '\n' && c != EOF)
         c = getc(stdin);
 }
+
+int ask_for_int(char *message)
+{
+    int input_user;
+
+    while (1)
+    {
+        printf("%s\n", message);
+        if (scanf("%d", &input_user) == 1)
+        {
+            clear_stdin();
+            return input_user;
+        }
+        else
+        {
+            printf("wrong input\n");
+        }
+    }
+}
+
+int ask_for_limited_int(char *message, int min, int max)
+{
+    int input_user;
+    int verified_input;
+
+    while (1)
+    {
+        printf("%s\n", message);
+        if (scanf("%d", &input_user) == 1)
+        {
+            clear_stdin();
+            if (input_user > min && input_user < max)
+            {
+                return input_user;
+            }
+            else
+            {
+                print("wrong input\n");
+            }
+        }
+    }
+}
+
+int ask_navigation(char *menu, int min, int max)
+{
+    return ask_for_limited_int(menu, min, max);
+}
+
+Point_s *create_point(char *message)
+{
+    Point_s *point = malloc(sizeof(Point_s));
+    point->x = ask_for_int(message);
+    point->y = ask_for_int(message);
+    return point;
+}
+
+void modify_point(char *message, Point_s *point) // le format des paramètres à input est :("Rectangle_s.x", Rectangle_s.x )
+{
+    printf("Ancienne valeur est %s: (%d, %d)\n", message, point->x, point->y);
+    point->x = ask_for_int("Quelle est la nouvelle valeur ?\n");
+    point->y = ask_for_int("Quelle est la nouvelle valeur ?\n");
+}
+
+void print_a_point(char *message, Point_s *point)
+{
+    printf("la valeur de x est ; %d\n", point->x);
+    printf(" la valeur de y est : %d\n", point->y);
+}
+
+void delete_point(Point_s *point)
+{
+    free(point);  // point dispose d'une adresse invalide
+    point = NULL; // ainsi point peut de nouveau accueillir des données
+}
+
+char *ask_color(char *message)
+{
+    char input_color[20];
+    char *verified_color = malloc(sizeof(verified_color));
+    int i;
+
+    while (1)
+    {
+        i = 1;
+        printf("définir la couleur du %s en héxadécimal:\n", message);
+        clear_stdin();
+        fgets(input_color, sizeof(input_color), stdin);
+        trim(input_color);
+
+        while (input_color[i] != '\0')
+        {
+
+            if (input_color[0] != '#')
+            {
+                printf("wrong input, missing #");
+            }
+            if (strlen(input_color != 7))
+            {
+                print("wrong input");
+            }
+            if ((input_color[i] >= '0' && input_color[i] <= '9') ||
+                (input_color[i] >= 'A' && input_color[i] <= 'F') ||
+                (input_color[i] >= 'a' && input_color[i] <= 'f'))
+            {
+                i++;
+                snprintf(verified_color, sizeof verified_color, "%s", input_color);
+                return verified_color;
+            }
+            else
+            {
+                printf("wrong input");
+                break;
+            }
+        }
+    }
+}
+
+void modify_color(char *message, char *old_color)
+{
+    char *new_color;
+    printf("L'ancienne couleur est : %s", old_color);
+    old_color = ask_color("quelle est la nouvelle couleur ?\n");
+    return new_color = old_color;
+}
+int create(void);
+// int editing(void);
+// int charge(void);
+// int visualize(void);
 
 int menu(void)
 {
@@ -59,18 +183,17 @@ int menu(void)
                 return 0;
                 break;
             default:
+                ("wrong input");
                 break;
             };
         }
-        else
-        {
-            printf("wrong input\n");
-        };
     }
 }
 
 int main(void)
 {
+
+    modify_point("Rectangle_s.x", Rectangle_s.x);
     menu();
 }
 
@@ -214,36 +337,44 @@ int style_shape(Styles_s style)
 
     while (1)
     {
-        printf("définir la couleur du contour en héxadécimal:\n");
+        printf("définir la valeur de la translation:\n");
         clear_stdin();
-        printf("contour :");
-        fgets(temp_stroke, sizeof(temp_stroke), stdin);
-        trim(temp_stroke);
+        scanf("x = %d\n", &temp_tx);
+        scanf("x = %d\n", &temp_tx);
 
-        while (temp_stroke[i] != '\0')
+        if ((temp_tx >= -1000 && temp_tx <= 1000) ||
+            (temp_ty >= -1000 && temp_ty <= 1000))
         {
-            clear_stdin();
-
-            if (temp_stroke[0] != '#')
-            {
-                printf("wrong input, missing #");
-            }
-
-            if ((temp_stroke[i] >= '0' && temp_stroke[i] <= '9') ||
-                (temp_stroke[i] >= 'A' && temp_stroke[i] <= 'F') ||
-                (temp_stroke[i] >= 'a' && temp_stroke[i] <= 'f'))
-            {
-                i++;
-            }
-            else
-            {
-                printf("wrong input");
-                break;
-            }
+            style.tx = temp_tx;
+            style.ty = temp_ty;
+            break;
         }
+        else
+        {
+            printf("wrong input");
+        };
     }
-    strcpy(style.stroke, temp_stroke);
-};
+
+    while (1)
+    {
+        printf("définir la valeur de la rotation :\n");
+        clear_stdin();
+        scanf("rotation = %d\n", &temp_angle);
+
+        if (temp_angle >= -360 && temp_angle <= 360)
+        {
+            style.angle = temp_angle;
+            break;
+        }
+        else
+        {
+            printf("wrong input, la valeur doit être comprise entre -360° et 360°");
+        };
+    }
+}
+strcpy(style.stroke, temp_stroke);
+}
+;
 
 int trim(char *sentence)
 {

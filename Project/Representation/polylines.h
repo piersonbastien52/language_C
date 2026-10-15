@@ -1,3 +1,4 @@
+#include "point.h"
 #ifndef POLYLINES_H
 #define POLYLINES_H
 
@@ -6,8 +7,7 @@ typedef struct Polylines_s Polylines_t;
 struct Polylines_s
 {
   Polylines_t *next;
-  int x;
-  int y;
+  Point_s point;
 };
 
 typedef struct List_polylines_s

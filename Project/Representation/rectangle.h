@@ -1,10 +1,10 @@
+#include "point.h"
 #ifndef RECTANGLE_H
 #define RECTANGLE_H
 
 typedef struct Rectangle_t
 {
-    int x;
-    int y;
+    Point_s point;
     int height;
     int width;
 } Rectangle_s;
