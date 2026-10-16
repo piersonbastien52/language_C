@@ -27,13 +27,13 @@ typedef struct
     Shape_e type;
     union
     {
-        Circle_s *circle;
-        Ellipse_s *ellipse;
-        Rectangle_s *rectangle;
-        Square_s *square;
-        Line_s *lines;
+        Circle_t *circle;
+        Ellipse_t *ellipse;
+        Rectangle_t *rectangle;
+        Square_t *square;
+        Line_t *lines;
         Polylines_t *polylines;
-        Styles_s *style;
+        Styles_t *style;
     } data;
 } Shape_s;
 

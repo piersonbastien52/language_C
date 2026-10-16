@@ -4,8 +4,8 @@
 
 typedef struct Line_s
 {
-    Point_s point1;
-    Point_s point2;
+    Point_t point1;
+    Point_t point2;
 
 } Line_t;
 

@@ -127,13 +127,16 @@ char *ask_color(char *message)
                 (input_color[i] >= 'a' && input_color[i] <= 'f'))
             {
                 i++;
-                snprintf(verified_color, 8, "%s", input_color);
-                // return verified_color; il faut que je vérifie toute la chaine avant de return
             }
             else
             {
                 printf("wrong input");
                 break;
+            }
+            if (input_color[i] == '\0')
+            {
+                strcpy(verified_color, input_color);
+                return verified_color;
             }
         }
     }
@@ -293,22 +296,22 @@ void modify_flip_y(Styles_t *style)
     style->flip_y = create_flip_y();
     printf("la nouvelle valeur de l'angle est : %d\n", style->flip_y);
 }
-/*  il faut ici que je clear les valeur des angles défini puis un free self!
-void delete_angle(int angle)
+// il faut ici que je clear les valeur des angles défini puis un free self!
+
+void delete_angle(Styles_t *style)
 {
-    free(angle);
+    style->angle = 0;
 }
 
-void delete_flip_x(int flip_x)
+void delete_flip_x(Styles_t *style)
 {
-    free(flip_x);
+    style->flip_x = 0;
 }
 
-void delete_flip_y(int flip_y)
+void delete_flip_y(Styles_t *style)
 {
-    free(flip_y);
+    style->flip_y = 0;
 }
-*/
 
 int create(void);
 // int editing(void);
@@ -348,7 +351,7 @@ int main(void)
         printf("wrong input");
         break;
     }
-    return 0
+    return 0;
 }
 
 void menu_create(void)
