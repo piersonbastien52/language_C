@@ -1,6 +1,7 @@
 
 #ifndef ENUM_H
 #define ENUM_H
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>

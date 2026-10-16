@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
+#include "Representation/color.h"
+#include "Representation/ask_for_a_flint.h"
+#include "Representation/Points.h"
 #include "Representation/point.h"
 #include "Representation/styles.h"
 #include "Representation/rectangle.h"
@@ -19,176 +22,6 @@ void clear_stdin(void)
         c = getc(stdin);
 }
 
-int ask_for_int(char *message)
-{
-    int input_user;
-
-    while (1)
-    {
-        printf("%s\n", message);
-        if (scanf("%d", &input_user) == 1)
-        {
-            clear_stdin();
-            return input_user;
-        }
-        else
-        {
-            printf("wrong input\n");
-        }
-    }
-}
-
-int ask_for_limited_int(char *message, int min, int max)
-{
-    int input_user;
-
-    while (1)
-    {
-        printf("%s\n", message);
-        if (scanf("%d", &input_user) == 1)
-        {
-            clear_stdin();
-            if (input_user >= min && input_user <= max)
-            {
-                return input_user;
-            }
-            else
-            {
-                printf("wrong input\n");
-            }
-        }
-    }
-}
-
-int ask_navigation(char *menu, int min, int max)
-{
-    return ask_for_limited_int(menu, min, max);
-}
-
-Point_t *create_point(char *message) // reverifier
-{
-    Point_t *point = malloc(sizeof(Point_t));
-    if (point == NULL)
-    {
-        return NULL;
-    }
-    point->x = ask_for_int(message);
-    point->y = ask_for_int(message);
-
-    return point;
-}
-void modify_point(char *message, Point_t *point) // le format des paramètres à input est :("Rectangle_s.x", Rectangle_s.x )
-{
-    printf("Ancienne valeur est %s: (%d, %d)\n", message, point->x, point->y);
-    point->x = ask_for_int("Quelle est la nouvelle valeur ?\n");
-    point->y = ask_for_int("Quelle est la nouvelle valeur ?\n");
-    printf("la nouvelle valeur de x est %d\n", point->x);
-    printf("la nouvelle valeur de y est %d\n", point->y);
-}
-
-void print_a_point(Point_t *point)
-{
-    printf("la valeur de x est : %d\n", point->x);
-    printf(" la valeur de y est : %d\n", point->y);
-}
-
-void delete_point(Point_t *point)
-{
-    free(point);
-}
-
-char *ask_color(char *message)
-{
-    char input_color[20];
-    char *verified_color = malloc(sizeof(char) * 8);
-    int i;
-
-    while (1)
-    {
-        i = 1;
-        printf("définir la couleur du %s en héxadécimal:\n", message);
-        fgets(input_color, sizeof(input_color), stdin);
-        trim(input_color);
-
-        while (input_color[i] != '\0')
-        {
-
-            if (input_color[0] != '#')
-            {
-                printf("wrong input, missing #");
-                break;
-            }
-            if (strlen(input_color) != 7)
-            {
-                printf("wrong input");
-            }
-            if ((input_color[i] >= '0' && input_color[i] <= '9') ||
-                (input_color[i] >= 'A' && input_color[i] <= 'F') ||
-                (input_color[i] >= 'a' && input_color[i] <= 'f'))
-            {
-                i++;
-            }
-            else
-            {
-                printf("wrong input");
-                break;
-            }
-            if (input_color[i] == '\0')
-            {
-                strcpy(verified_color, input_color);
-                return verified_color;
-            }
-        }
-    }
-}
-
-char *modify_color(char *message, char *old_color)
-
-{
-    printf("L'ancienne couleur est : %s", old_color);
-    free(old_color);
-    return ask_color("quelle est la nouvelle couleur ?\n");
-}
-
-void delete_color(char *color)
-{
-    free(color);
-}
-
-void menu_create_rotate(void)
-{
-    int choice_2 = ask_navigation(
-        "1.Effectuer une rotation\n"
-        "2.inverser la structure sur l'axe x\n"
-        "3.inverser la structure sur l'axe y\n"
-        "4.modifier une rotation\n"
-        "5.Retour\n"
-        "Enter your choice (1-5): \n",
-        1, 5);
-    {
-        switch (choice_2)
-        {
-        case 1:
-            create_rotation();
-            break;
-        case 2:
-            create_flip_x();
-            break;
-        case 3:
-            create_flip_y();
-            break;
-        case 4:
-            menu_modify_rotate();
-            break;
-        case 5:
-            create();
-            break;
-        default:
-            printf("wrong input");
-            break;
-        }
-    }
-}
 int create_rotation(void)
 {
     return ask_for_limited_int("quel angle souhaitez-vous appliquer ? ", -360, 360);
@@ -296,7 +129,6 @@ void modify_flip_y(Styles_t *style)
     style->flip_y = create_flip_y();
     printf("la nouvelle valeur de l'angle est : %d\n", style->flip_y);
 }
-// il faut ici que je clear les valeur des angles défini puis un free self!
 
 void delete_angle(Styles_t *style)
 {
@@ -311,6 +143,45 @@ void delete_flip_x(Styles_t *style)
 void delete_flip_y(Styles_t *style)
 {
     style->flip_y = 0;
+}
+
+// créer une fonction qui regroupe tous les paramètres de style, comme ca il n'est nécessaire d'appeler qu'une seule focntion pour définir le style d'une forme
+
+int create_fill(Styles_t *style)
+{
+    style->fill = ask_color("quelle couleur souhaitez-vous pour le remplissage ?\n");
+}
+int create_outline(Styles_t *style)
+{
+    style->stroke = ask_color("quelle couleur souhaitez-vous pour le contour?\n");
+}
+
+int create_stroke_opacity(Styles_t *style)
+{
+    style->stroke_opacity = ask_for_limited_float("quelle est l'opacité désiré pour le contour ?\n", 0, 1);
+}
+
+int create_fill_opacity(Styles_t *style)
+{
+    style->fill_opacity = ask_for_limited_float("quelle est l'opacité désiré pour le fond ?\n", 0, 1);
+}
+
+int create_stroke_width(Styles_t *style)
+{
+    style->stroke_width = ask_for_limited_float("quelle épaisseur souhaitez vous pour le contour ?\n", 0, 1);
+}
+
+Styles_t *create_translate(void)
+{
+    Styles_t *move = malloc(sizeof(Styles_t));
+    if (move == NULL)
+    {
+        return NULL;
+    }
+    move->tx = ask_for_int("definissez la valeur de la translation sur l'axe x\n");
+    move->ty = ask_for_int("définissez la valeur de la translation sur l'axe y\n");
+
+    return move;
 }
 
 int create(void);
@@ -392,5 +263,70 @@ void menu_create(void)
     default:
         printf("wrong input");
         break;
+    }
+}
+
+void menu_create_rotate(void)
+
+{
+
+    int choice_2 = ask_navigation(
+
+        "1.Effectuer une rotation\n"
+
+        "2.inverser la structure sur l'axe x\n"
+
+        "3.inverser la structure sur l'axe y\n"
+
+        "4.modifier une rotation\n"
+
+        "5.Retour\n"
+
+        "Enter your choice (1-5): \n",
+
+        1, 5);
+
+    {
+
+        switch (choice_2)
+
+        {
+
+        case 1:
+
+            create_rotation();
+
+            break;
+
+        case 2:
+
+            create_flip_x();
+
+            break;
+
+        case 3:
+
+            create_flip_y();
+
+            break;
+
+        case 4:
+
+            menu_modify_rotate();
+
+            break;
+
+        case 5:
+
+            menu_create();
+
+            break;
+
+        default:
+
+            printf("wrong input");
+
+            break;
+        }
     }
 }
