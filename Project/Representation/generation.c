@@ -182,7 +182,7 @@ int supp_node(Landmark_t *chain, unsigned int index) // supression d'un maillon 
   chain->length--;
   return 1;
 }
-
+/*
 int main(void)
 {
 
@@ -202,4 +202,4 @@ int main(void)
   return EXIT_SUCCESS;
 }
 
-// idée de con : déplacer les maillons arrière plan, premier plan
+*/

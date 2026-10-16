@@ -1,11 +1,6 @@
 #include "point.h"
 #include <stdio.h>
 
-int ask_navigation(char *menu, int min, int max)
-{
-    return ask_for_limited_int(menu, min, max);
-}
-
 Point_t *create_point(char *message) // reverifier
 {
     Point_t *point = malloc(sizeof(Point_t));

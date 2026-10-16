@@ -11,8 +11,8 @@ typedef struct Styles_s
   int tx;
   int ty; // tx et ty, sont les coordonnées de translation et angle de rotation
   int angle;
-  int flip_x;
-  int flip_y;
+  bool flip_x;
+  bool flip_y;
 
 } Styles_t;
 

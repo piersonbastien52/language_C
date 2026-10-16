@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
+#include "Representation/apply_style.h"
 #include "Representation/color.h"
 #include "Representation/ask_for_a_flint.h"
 #include "Representation/Points.h"
@@ -22,166 +23,9 @@ void clear_stdin(void)
         c = getc(stdin);
 }
 
-int create_rotation(void)
+int ask_navigation(char *menu, int min, int max)
 {
-    return ask_for_limited_int("quel angle souhaitez-vous appliquer ? ", -360, 360);
-}
-
-int create_flip_x(void)
-{
-    int choice = ask_navigation(
-        "1.Oui\n"
-        "2.Non\n"
-        "3.Retour\n"
-        "Enter your choice (1-3): \n",
-        1, 3);
-    {
-        switch (choice)
-        {
-        case 1:
-            return 90; // faire correspondre return 1 flip_x=90° ? utiliser un bool ?
-        case 2:
-            menu_create_rotate();
-            return 0;
-            break;
-        case 3:
-            menu_create_rotate();
-            return 0;
-            break;
-        }
-    }
-}
-
-int create_flip_y(void)
-{
-    int choice = ask_navigation(
-        "1.Oui\n"
-        "2.Non\n"
-        "3.Retour\n"
-        "Enter your choice (1-3): \n",
-        1, 3);
-    {
-        switch (choice)
-        {
-        case 1:
-            return 180; // faire correspondre return 1 flip_y=180° ? utiliser un bool ?
-        case 2:
-            menu_create_rotate();
-            return 0;
-            break;
-        case 3:
-            menu_create_rotate();
-            return 0;
-            break;
-        }
-    }
-}
-
-void menu_modify_rotate(void)
-{
-    int choice = ask_navigation(
-        "1.Modifier la rotation\n"
-        "2.modifier l'inversion la structure sur l'axe x\n"
-        "3.modifier l'inversion la structure sur l'axe y\n"
-        "4.Retour\n"
-        "Enter your choice (1-4): \n",
-        1, 4);
-    {
-        switch (choice)
-        {
-        case 1:
-            create_rotation();
-            break;
-        case 2:
-            create_flip_x();
-            break;
-        case 3:
-            create_flip_y();
-            break;
-        case 4:
-            menu_create_rotate();
-            break;
-        default:
-            printf("wrong input");
-            break;
-        }
-    }
-}
-
-void modify_rotation(Styles_t *style) // à revérifier
-
-{
-    printf("l'angle précédemment saisi est : %d\n", style->angle);
-    style->angle = create_rotation();
-    printf("la nouvelle valeur de l'angle est : %d\n", style->angle);
-}
-
-void modify_flip_x(Styles_t *style)
-{
-    printf("une inversiond de %d° à été appliqué\n", style->flip_x);
-    style->flip_x = create_flip_x();
-    printf("la nouvelle valeur de l'angle est : %d\n", style->flip_x);
-}
-
-void modify_flip_y(Styles_t *style)
-{
-    printf("une inversiond de %d° à été appliqué\n", style->flip_y);
-    style->flip_y = create_flip_y();
-    printf("la nouvelle valeur de l'angle est : %d\n", style->flip_y);
-}
-
-void delete_angle(Styles_t *style)
-{
-    style->angle = 0;
-}
-
-void delete_flip_x(Styles_t *style)
-{
-    style->flip_x = 0;
-}
-
-void delete_flip_y(Styles_t *style)
-{
-    style->flip_y = 0;
-}
-
-// créer une fonction qui regroupe tous les paramètres de style, comme ca il n'est nécessaire d'appeler qu'une seule focntion pour définir le style d'une forme
-
-int create_fill(Styles_t *style)
-{
-    style->fill = ask_color("quelle couleur souhaitez-vous pour le remplissage ?\n");
-}
-int create_outline(Styles_t *style)
-{
-    style->stroke = ask_color("quelle couleur souhaitez-vous pour le contour?\n");
-}
-
-int create_stroke_opacity(Styles_t *style)
-{
-    style->stroke_opacity = ask_for_limited_float("quelle est l'opacité désiré pour le contour ?\n", 0, 1);
-}
-
-int create_fill_opacity(Styles_t *style)
-{
-    style->fill_opacity = ask_for_limited_float("quelle est l'opacité désiré pour le fond ?\n", 0, 1);
-}
-
-int create_stroke_width(Styles_t *style)
-{
-    style->stroke_width = ask_for_limited_float("quelle épaisseur souhaitez vous pour le contour ?\n", 0, 1);
-}
-
-Styles_t *create_translate(void)
-{
-    Styles_t *move = malloc(sizeof(Styles_t));
-    if (move == NULL)
-    {
-        return NULL;
-    }
-    move->tx = ask_for_int("definissez la valeur de la translation sur l'axe x\n");
-    move->ty = ask_for_int("définissez la valeur de la translation sur l'axe y\n");
-
-    return move;
+    return ask_for_limited_int(menu, min, max);
 }
 
 int create(void);
@@ -326,6 +170,37 @@ void menu_create_rotate(void)
 
             printf("wrong input");
 
+            break;
+        }
+    }
+}
+
+void menu_modify_rotate(void)
+{
+    int choice = ask_navigation(
+        "1.Modifier la rotation\n"
+        "2.modifier l'inversion la structure sur l'axe x\n"
+        "3.modifier l'inversion la structure sur l'axe y\n"
+        "4.Retour\n"
+        "Enter your choice (1-4): \n",
+        1, 4);
+    {
+        switch (choice)
+        {
+        case 1:
+            create_rotation();
+            break;
+        case 2:
+            create_flip_x();
+            break;
+        case 3:
+            create_flip_y();
+            break;
+        case 4:
+            menu_create_rotate();
+            break;
+        default:
+            printf("wrong input");
             break;
         }
     }
