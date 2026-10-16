@@ -2,11 +2,12 @@
 #ifndef RECTANGLE_H
 #define RECTANGLE_H
 
-typedef struct Rectangle_t
+typedef struct Rectangle_s
 {
-    Point_s point;
+    Point_t point;
     int height;
     int width;
-} Rectangle_s;
+
+} Rectangle_t;
 
 #endif

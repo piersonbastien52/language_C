@@ -7,7 +7,7 @@ typedef struct Polylines_s Polylines_t;
 struct Polylines_s
 {
   Polylines_t *next;
-  Point_s point;
+  Point_t point;
 };
 
 typedef struct List_polylines_s

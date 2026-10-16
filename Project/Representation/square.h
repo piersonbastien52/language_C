@@ -2,12 +2,12 @@
 #ifndef SQUARE_H
 #define SQUARE_H
 
-typedef struct Square_t
+typedef struct Square_s
 
 {
-    Point_s point;
+    Point_t point;
     int height;
 
-} Square_s;
+} Square_t;
 
 #endif

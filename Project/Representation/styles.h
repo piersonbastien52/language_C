@@ -1,7 +1,7 @@
 #ifndef STYLE_H
 #define STYLE_H
 
-typedef struct Styles_t
+typedef struct Styles_s
 {
   char *stroke;
   char *fill;
@@ -11,9 +11,9 @@ typedef struct Styles_t
   int tx;
   int ty; // tx et ty, sont les coordonnées de translation et angle de rotation
   int angle;
+  int flip_x;
+  int flip_y;
 
-  // il manque l'effet mirroir
-
-} Styles_s;
+} Styles_t;
 
 #endif

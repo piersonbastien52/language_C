@@ -2,11 +2,12 @@
 #ifndef ELLIPSE_H
 #define ELLIPSE_H
 
-typedef struct Ellipse_t
+typedef struct Ellipse_s
 {
     int rx;
     int ry;
-    Point_s center;
-} Ellipse_s;
+    Point_t center;
+
+} Ellipse_t;
 
 #endif

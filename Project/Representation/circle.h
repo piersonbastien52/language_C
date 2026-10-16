@@ -2,11 +2,11 @@
 #ifndef CIRCLE_H
 #define CIRCLE_H
 
-typedef struct Circle_t
+typedef struct Circle_s
 {
     int r;
-    Point_s center;
+    Point_t center;
 
-} Circle_s;
+} Circle_t;
 
 #endif

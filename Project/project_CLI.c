@@ -41,7 +41,6 @@ int ask_for_int(char *message)
 int ask_for_limited_int(char *message, int min, int max)
 {
     int input_user;
-    int verified_input;
 
     while (1)
     {
@@ -49,13 +48,13 @@ int ask_for_limited_int(char *message, int min, int max)
         if (scanf("%d", &input_user) == 1)
         {
             clear_stdin();
-            if (input_user > min && input_user < max)
+            if (input_user >= min && input_user <= max)
             {
                 return input_user;
             }
             else
             {
-                print("wrong input\n");
+                printf("wrong input\n");
             }
         }
     }
@@ -66,44 +65,48 @@ int ask_navigation(char *menu, int min, int max)
     return ask_for_limited_int(menu, min, max);
 }
 
-Point_s *create_point(char *message)
+Point_t *create_point(char *message) // reverifier
 {
-    Point_s *point = malloc(sizeof(Point_s));
+    Point_t *point = malloc(sizeof(Point_t));
+    if (point == NULL)
+    {
+        return NULL;
+    }
     point->x = ask_for_int(message);
     point->y = ask_for_int(message);
+
     return point;
 }
-
-void modify_point(char *message, Point_s *point) // le format des paramètres à input est :("Rectangle_s.x", Rectangle_s.x )
+void modify_point(char *message, Point_t *point) // le format des paramètres à input est :("Rectangle_s.x", Rectangle_s.x )
 {
     printf("Ancienne valeur est %s: (%d, %d)\n", message, point->x, point->y);
     point->x = ask_for_int("Quelle est la nouvelle valeur ?\n");
     point->y = ask_for_int("Quelle est la nouvelle valeur ?\n");
+    printf("la nouvelle valeur de x est %d\n", point->x);
+    printf("la nouvelle valeur de y est %d\n", point->y);
 }
 
-void print_a_point(char *message, Point_s *point)
+void print_a_point(Point_t *point)
 {
-    printf("la valeur de x est ; %d\n", point->x);
+    printf("la valeur de x est : %d\n", point->x);
     printf(" la valeur de y est : %d\n", point->y);
 }
 
-void delete_point(Point_s *point)
+void delete_point(Point_t *point)
 {
-    free(point);  // point dispose d'une adresse invalide
-    point = NULL; // ainsi point peut de nouveau accueillir des données
+    free(point);
 }
 
 char *ask_color(char *message)
 {
     char input_color[20];
-    char *verified_color = malloc(sizeof(verified_color));
+    char *verified_color = malloc(sizeof(char) * 8);
     int i;
 
     while (1)
     {
         i = 1;
         printf("définir la couleur du %s en héxadécimal:\n", message);
-        clear_stdin();
         fgets(input_color, sizeof(input_color), stdin);
         trim(input_color);
 
@@ -113,18 +116,19 @@ char *ask_color(char *message)
             if (input_color[0] != '#')
             {
                 printf("wrong input, missing #");
+                break;
             }
-            if (strlen(input_color != 7))
+            if (strlen(input_color) != 7)
             {
-                print("wrong input");
+                printf("wrong input");
             }
             if ((input_color[i] >= '0' && input_color[i] <= '9') ||
                 (input_color[i] >= 'A' && input_color[i] <= 'F') ||
                 (input_color[i] >= 'a' && input_color[i] <= 'f'))
             {
                 i++;
-                snprintf(verified_color, sizeof verified_color, "%s", input_color);
-                return verified_color;
+                snprintf(verified_color, 8, "%s", input_color);
+                // return verified_color; il faut que je vérifie toute la chaine avant de return
             }
             else
             {
@@ -135,261 +139,255 @@ char *ask_color(char *message)
     }
 }
 
-void modify_color(char *message, char *old_color)
+char *modify_color(char *message, char *old_color)
+
 {
-    char *new_color;
     printf("L'ancienne couleur est : %s", old_color);
-    old_color = ask_color("quelle est la nouvelle couleur ?\n");
-    return new_color = old_color;
+    free(old_color);
+    return ask_color("quelle est la nouvelle couleur ?\n");
 }
+
+void delete_color(char *color)
+{
+    free(color);
+}
+
+void menu_create_rotate(void)
+{
+    int choice_2 = ask_navigation(
+        "1.Effectuer une rotation\n"
+        "2.inverser la structure sur l'axe x\n"
+        "3.inverser la structure sur l'axe y\n"
+        "4.modifier une rotation\n"
+        "5.Retour\n"
+        "Enter your choice (1-5): \n",
+        1, 5);
+    {
+        switch (choice_2)
+        {
+        case 1:
+            create_rotation();
+            break;
+        case 2:
+            create_flip_x();
+            break;
+        case 3:
+            create_flip_y();
+            break;
+        case 4:
+            menu_modify_rotate();
+            break;
+        case 5:
+            create();
+            break;
+        default:
+            printf("wrong input");
+            break;
+        }
+    }
+}
+int create_rotation(void)
+{
+    return ask_for_limited_int("quel angle souhaitez-vous appliquer ? ", -360, 360);
+}
+
+int create_flip_x(void)
+{
+    int choice = ask_navigation(
+        "1.Oui\n"
+        "2.Non\n"
+        "3.Retour\n"
+        "Enter your choice (1-3): \n",
+        1, 3);
+    {
+        switch (choice)
+        {
+        case 1:
+            return 90; // faire correspondre return 1 flip_x=90° ? utiliser un bool ?
+        case 2:
+            menu_create_rotate();
+            return 0;
+            break;
+        case 3:
+            menu_create_rotate();
+            return 0;
+            break;
+        }
+    }
+}
+
+int create_flip_y(void)
+{
+    int choice = ask_navigation(
+        "1.Oui\n"
+        "2.Non\n"
+        "3.Retour\n"
+        "Enter your choice (1-3): \n",
+        1, 3);
+    {
+        switch (choice)
+        {
+        case 1:
+            return 180; // faire correspondre return 1 flip_y=180° ? utiliser un bool ?
+        case 2:
+            menu_create_rotate();
+            return 0;
+            break;
+        case 3:
+            menu_create_rotate();
+            return 0;
+            break;
+        }
+    }
+}
+
+void menu_modify_rotate(void)
+{
+    int choice = ask_navigation(
+        "1.Modifier la rotation\n"
+        "2.modifier l'inversion la structure sur l'axe x\n"
+        "3.modifier l'inversion la structure sur l'axe y\n"
+        "4.Retour\n"
+        "Enter your choice (1-4): \n",
+        1, 4);
+    {
+        switch (choice)
+        {
+        case 1:
+            create_rotation();
+            break;
+        case 2:
+            create_flip_x();
+            break;
+        case 3:
+            create_flip_y();
+            break;
+        case 4:
+            menu_create_rotate();
+            break;
+        default:
+            printf("wrong input");
+            break;
+        }
+    }
+}
+
+void modify_rotation(Styles_t *style) // à revérifier
+
+{
+    printf("l'angle précédemment saisi est : %d\n", style->angle);
+    style->angle = create_rotation();
+    printf("la nouvelle valeur de l'angle est : %d\n", style->angle);
+}
+
+void modify_flip_x(Styles_t *style)
+{
+    printf("une inversiond de %d° à été appliqué\n", style->flip_x);
+    style->flip_x = create_flip_x();
+    printf("la nouvelle valeur de l'angle est : %d\n", style->flip_x);
+}
+
+void modify_flip_y(Styles_t *style)
+{
+    printf("une inversiond de %d° à été appliqué\n", style->flip_y);
+    style->flip_y = create_flip_y();
+    printf("la nouvelle valeur de l'angle est : %d\n", style->flip_y);
+}
+/*  il faut ici que je clear les valeur des angles défini puis un free self!
+void delete_angle(int angle)
+{
+    free(angle);
+}
+
+void delete_flip_x(int flip_x)
+{
+    free(flip_x);
+}
+
+void delete_flip_y(int flip_y)
+{
+    free(flip_y);
+}
+*/
+
 int create(void);
 // int editing(void);
 // int charge(void);
 // int visualize(void);
 
-int menu(void)
-{
-    unsigned int choice;
-    float num1, num2, result;
-    unsigned int user_input;
-
-    while (1)
-    {
-        printf("1.Créer\n");
-        printf("2.Editer\n");
-        printf("3.Charger\n");
-        printf("4.Visualiser\n");
-        printf("5.quitter\n");
-        printf("Enter your choice (1-5): \n");
-        scanf("%d", &user_input);
-        clear_stdin();
-        if (user_input >= 1 && user_input <= 5)
-        {
-            switch (user_input)
-            {
-            case 1:
-                create();
-                break;
-            case 2:
-                // editing();
-                break;
-            case 3:
-                // charge();
-                break;
-            case 4:
-                // visualize();
-                break;
-            case 5:
-                return 0;
-                break;
-            default:
-                ("wrong input");
-                break;
-            };
-        }
-    }
-}
-
 int main(void)
 {
 
-    modify_point("Rectangle_s.x", Rectangle_s.x);
-    menu();
+    int choice = ask_navigation(
+        "1.Créer\n"
+        "2.Editer\n"
+        "3.Charger\n"
+        "4.Visualiser\n"
+        "5.quitter\n"
+        "Enter your choice (1-5): \n",
+        1, 5);
+
+    switch (choice)
+    {
+    case 1:
+        menu_create();
+        break;
+    case 2:
+        // editing();
+        break;
+    case 3:
+        // charge();
+        break;
+    case 4:
+        // visualize();
+        break;
+    case 5:
+        return 0;
+        break;
+    default:
+        printf("wrong input");
+        break;
+    }
+    return 0
 }
 
-int create(void)
+void menu_create(void)
 {
-    unsigned int choice;
-    float num1, num2, result;
-    unsigned int user_input;
+    int choice_1 = ask_navigation(
+        "1.Rectangle\n"
+        "2.Carré\n"
+        "3.Cercle\n"
+        "4.Ellipse\n"
+        "5.Line\n"
+        "6.Polyline\n"
+        "7.Retour\n"
+        "Enter your choice (1-7): \n",
+        1, 7);
 
-    while (1)
+    switch (choice_1)
     {
-        printf("1.Rectangle\n");
-        printf("2.Carré\n");
-        printf("3.Cercle\n");
-        printf("4.Ellipse\n");
-        printf("5.Line\n");
-        printf("6.Polyline\n");
-        printf("7.retour\n");
-        printf("Enter your choice (1-7): \n");
-        clear_stdin();
-        scanf("%d", &user_input);
-        if (user_input >= 1 && user_input <= 5)
-        {
-            switch (user_input)
-            {
-            case 1:
-                // input_rectangle;
-                break;
-            case 2:
-                // input_square;
-                break;
-            case 3:
-                // input_circle;
-                break;
-            case 4:
-                // input_ellipse;
-                break;
-            case 5:
-                // input_line;
-                break;
-            case 7:
-            // input_polylines
-            case 6:
-                menu();
-                break;
-            default:
-                break;
-            };
-        }
-        else
-        {
-            printf("wrong input");
-        };
+    case 1:
+        // input_rectangle;
+        break;
+    case 2:
+        // input_square;
+        break;
+    case 3:
+        // input_circle;
+        break;
+    case 4:
+        // input_ellipse;
+        break;
+    case 5:
+        // input_line;
+        break;
+    case 7:
+    // input_polylines
+    case 6:
+        // menu();  //où est menu ??
+        break;
+    default:
+        printf("wrong input");
+        break;
     }
-}
-
-int input_rectangle(Rectangle_s rectangle)
-{
-    int temp_x;
-    int temp_y;
-    int temp_height;
-    int temp_width;
-
-    while (1)
-    {
-        printf("définir x:\n");
-        clear_stdin();
-        scanf("x = %d\n", &temp_x);
-
-        if (temp_x >= -1000 && temp_x <= 1000)
-        {
-            rectangle.x = temp_x;
-            break;
-        }
-        else
-        {
-            printf("wrong input");
-        };
-    }
-    while (1)
-    {
-        printf("définir y:\n");
-        clear_stdin();
-        scanf("y = %d\n", &temp_y);
-
-        if (temp_y >= -1000 && temp_y <= 1000)
-        {
-            rectangle.y = temp_y;
-            break;
-        }
-        else
-        {
-            printf("wrong input");
-        };
-    }
-    while (1)
-    {
-        printf("définir la hauteur :\n");
-        clear_stdin();
-        scanf("hauteur = %d\n", &temp_height);
-
-        if (temp_height >= -1000 && temp_height <= 1000)
-        {
-            rectangle.height = temp_height;
-            break;
-        }
-        else
-        {
-            printf("wrong input");
-        };
-    }
-    while (1)
-    {
-        printf("définir la largeur :\n");
-        clear_stdin();
-        scanf("largeur = %d\n", &temp_width);
-
-        if (temp_width >= -1000 && temp_width <= 1000)
-        {
-            rectangle.width = temp_width;
-            break;
-        }
-        else
-        {
-            printf("wrong input");
-        };
-    }
-}
-
-int style_shape(Styles_s style)
-{
-
-    char temp_stroke[20];
-    char temp_fill[20];
-    float temp_stroke_opacity;
-    float temp_fill_opacity;
-    float temp_stroke_width;
-    int temp_tx;
-    int temp_ty;
-    int temp_angle;
-
-    while (1)
-    {
-        printf("définir la valeur de la translation:\n");
-        clear_stdin();
-        scanf("x = %d\n", &temp_tx);
-        scanf("x = %d\n", &temp_tx);
-
-        if ((temp_tx >= -1000 && temp_tx <= 1000) ||
-            (temp_ty >= -1000 && temp_ty <= 1000))
-        {
-            style.tx = temp_tx;
-            style.ty = temp_ty;
-            break;
-        }
-        else
-        {
-            printf("wrong input");
-        };
-    }
-
-    while (1)
-    {
-        printf("définir la valeur de la rotation :\n");
-        clear_stdin();
-        scanf("rotation = %d\n", &temp_angle);
-
-        if (temp_angle >= -360 && temp_angle <= 360)
-        {
-            style.angle = temp_angle;
-            break;
-        }
-        else
-        {
-            printf("wrong input, la valeur doit être comprise entre -360° et 360°");
-        };
-    }
-}
-strcpy(style.stroke, temp_stroke);
-}
-;
-
-int trim(char *sentence)
-{
-    int a = strlen(sentence);
-    int i = 0; // lecture
-    int j = 0; // écriture
-
-    while (sentence[i] != '\0')
-    {
-        if (sentence[i] != ' ')
-        {
-            sentence[j] = sentence[i];
-            j++;
-        }
-        i++;
-    }
-    sentence[j] = '\0';
 }
