@@ -12,7 +12,23 @@ char *ask_color(char *message)
         i = 1;
         printf("définir la couleur du %s en héxadécimal:\n", message);
         fgets(input_color, sizeof(input_color), stdin); // ici, il n'y a plus de trim, il va falloir le refaire
+        {
+            int i = 0; // lecture
+            int j = 0; // écriture
 
+            while (input_color[i] != '\0')
+            {
+                if (input_color[i] != ' ')
+                {
+                    input_color[j] = input_color[i];
+                    j++;
+                }
+
+                i++;
+            }
+
+            input_color[j] = '\0';
+        }
         while (input_color[i] != '\0')
         {
 
@@ -24,6 +40,7 @@ char *ask_color(char *message)
             if (strlen(input_color) != 7)
             {
                 printf("wrong input");
+                continue;
             }
             if ((input_color[i] >= '0' && input_color[i] <= '9') ||
                 (input_color[i] >= 'A' && input_color[i] <= 'F') ||
@@ -62,3 +79,5 @@ void delete_color(char *color)
 {
     free(color);
 }
+
+*

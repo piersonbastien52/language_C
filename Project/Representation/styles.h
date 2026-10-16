@@ -1,5 +1,6 @@
 #ifndef STYLE_H
 #define STYLE_H
+#include <stdbool.h>
 
 typedef struct Styles_s
 {
