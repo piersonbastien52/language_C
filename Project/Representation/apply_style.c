@@ -22,6 +22,7 @@ void create_style(Styles_t *style)
     style->fill_opacity = ask_for_limited_float("what is the fill opacity ?\n", 0, 1);
     style->stroke_width = ask_for_limited_float("what is the stroke width ?\n", 0, 1);
     style->angle = ask_for_limited_int("what angle apply ? ", -360, 360);
+    style->
 }
 
 void modify_style(Styles_t *style) // voir si oil n'y a pas un moyen de modifierqu'une seule valeur et pas toute, pas besoin de boucle ??
@@ -36,13 +37,13 @@ void modify_style(Styles_t *style) // voir si oil n'y a pas un moyen de modifier
     style->stroke = ask_color("what is the new stroke color ?\n");
     printf("the new stroke color is : %s\n", style->stroke);
 
-    printf("the stroke opacity is : %d\n", style->stroke_opacity);
+    printf("the stroke opacity is : %f\n", style->stroke_opacity);
     style->stroke_opacity = ask_for_limited_float("what is the new stroke opacity ?\n", 0, 1);
-    printf("the new stroke opacity is : %d\n", style->stroke_opacity);
+    printf("the new stroke opacity is : %f\n", style->stroke_opacity);
 
-    printf("the filling opacity is : %d\n", style->fill_opacity);
+    printf("the filling opacity is : %f\n", style->fill_opacity);
     style->fill_opacity = ask_for_limited_float("what is teh new filling opacity  ?\n", 0, 1);
-    printf("the new filling opacity is : %d\n", style->fill_opacity);
+    printf("the new filling opacity is : %f\n", style->fill_opacity);
 
     printf("the stroke width is : %f\n", style->stroke_width);
     style->stroke_width = ask_for_limited_float("whst is the new stroke width ?\n", 0, 1);
@@ -64,9 +65,9 @@ void print_style(Styles_t *style)
 {
     printf("the filling color is : %s\n", style->fill);
     printf("the stroke color is : %s\n", style->stroke);
-    printf("the stroke opacity is : %d\n", style->stroke_opacity);
-    printf("the filling opacity is : %d\n", style->fill_opacity);
-    printf("the stroke width is : %d\n", style->stroke_width);
+    printf("the stroke opacity is : %f\n", style->stroke_opacity);
+    printf("the filling opacity is : %f\n", style->fill_opacity);
+    printf("the stroke width is : %f\n", style->stroke_width);
     printf("the applied angle is : %d\n", style->angle);
     printf("the tx translation value is : %d\n", style->tx);
     printf("the ty translation value is : %d\n", style->ty);
@@ -83,22 +84,6 @@ void delete_style(Styles_t *style)
     {
         free(style->stroke);
     }
-
-    if (style->angle != NULL)
-    {
-        free(style->angle);
-    }
-
-    if (style->tx != NULL)
-    {
-        free(style->tx);
-    }
-
-    if (style->ty != NULL)
-    {
-        free(style->ty);
-    }
-
     if (style != NULL)
     {
         free(style);

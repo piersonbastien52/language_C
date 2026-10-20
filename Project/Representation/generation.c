@@ -44,7 +44,7 @@ Landmark_t *add_node(Landmark_t *chain, List_shape_t *link)
 
   if (link == NULL)
   {
-    return link;
+    return chain;
   }
 
   if (chain->start == NULL)
@@ -109,14 +109,10 @@ int supp_node(Landmark_t *chain, unsigned int index) // supression d'un maillon 
     previous->next = next;
 
     if (next != NULL)
+    {
       next->previous = previous;
+    }
   }
-
-  previous->next = next;
-
-  if (next != NULL)
-    next->previous = previous;
-
   free_node(current);
 
   chain->length--;

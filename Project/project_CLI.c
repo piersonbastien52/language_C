@@ -15,18 +15,6 @@
 #include "Representation/square.h"
 #include "Representation/enum.h"
 
-void clear_stdin(void)
-{
-    char c = 'a';
-    while (c != '\n' && c != EOF)
-        c = getc(stdin);
-}
-
-int ask_navigation(char *menu, int min, int max)
-{
-    return ask_for_limited_int(menu, min, max);
-}
-
 int create(void);
 // int editing(void);
 // int charge(void);

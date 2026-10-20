@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
+#include "Representation/Points.h"
 #include "Representation/apply_style.h"
 #include "Representation/color.h"
 #include "Representation/ask_for_a_flint.h"
@@ -15,17 +16,13 @@
 #include "Representation/square.h"
 #include "Representation/enum.h"
 
-Point_t *create_point()
-{
-    Point_t *point = malloc(sizeof(Point_t));
-    point->x = ask_for_int("what is the coordonate x ?\n");
-    point->y = ask_for_int("what is the coordonate y ?\n");
-    return point;
-}
-
-Circle_t *create_circle(void)
+Circle_t *create_circle(void) // oà verifier le if circle ==NULL absoluement !! si ca fonctionne l'appliquer aux autres
 {
     Circle_t *circle = malloc(sizeof(Circle_t));
+    if (circle == NULL)
+    {
+        return;
+    }
     circle->r = ask_for_int("what is the circle's radius ?\n");
     circle->center = create_point();
     return circle;
@@ -37,7 +34,7 @@ Styles_t *circle_styles(void)
 
     if (circle == NULL)
     {
-        return NULL;
+        return;
     }
     else
     {
@@ -49,6 +46,7 @@ Styles_t *circle_styles(void)
 void modify_circle(Circle_t *circle)
 {
     printf("The center's coordonates are :(%d, %d)\n", circle->center->x, circle->center->y);
+    free(circle->center);
     circle->center = create_point();
     printf("the new coordonates are : (%d, %d)\n", circle->center->x, circle->center->y);
 
@@ -70,12 +68,12 @@ void delete_circle(Circle_t *circle)
 {
     if (circle == NULL)
     {
-        return NULL;
+        return;
     }
     else
     {
-        free(circle->center->x);
-        free(circle->center->y);
+        free(circle->center);
+        free(circle);
     }
 }
 
@@ -110,6 +108,7 @@ void modify_ellipse(Ellipse_t *ellipse)
 
 {
     printf("The center's coordonates are :(%d, %d)\n", ellipse->center->x, ellipse->center->y);
+    free(ellipse->center);
     ellipse->center = create_point();
     printf("the new coordonates are : (%d, %d)\n", ellipse->center->x, ellipse->center->y);
 
@@ -137,12 +136,12 @@ void delete_ellipse(Ellipse_t *ellipse)
 {
     if (ellipse == NULL)
     {
-        return NULL;
+        return;
     }
     else
     {
-        free(ellipse->center->x);
-        free(ellipse->center->y);
+        free(ellipse->center);
+        free(ellipse);
     }
 }
 
@@ -173,6 +172,7 @@ Styles_t *rectangle_styles(void)
 void modify_rectangle(Rectangle_t *rectangle)
 {
     printf("The old coordonates of the origin are (%d, %d)\n", rectangle->point->x, rectangle->point->y);
+    free(rectangle->point);
     rectangle->point = create_point();
     printf("the new coordopnates are : (%d, %d)\n", rectangle->point->x, rectangle->point->y);
 
@@ -200,12 +200,12 @@ void delete_rectangle(Rectangle_t *rectangle)
 {
     if (rectangle == NULL)
     {
-        return NULL;
+        return;
     }
     else
     {
-        free(rectangle->point->x);
-        free(rectangle->point->y);
+        free(rectangle->point);
+        free(rectangle);
     }
 }
 
@@ -235,6 +235,7 @@ Styles_t *square_styles(void)
 void modify_square(Square_t *square)
 {
     printf("The old coordonates of the origin are (%d, %d)\n", square->point->x, square->point->y);
+    free(square->point);
     square->point = create_point();
     printf("the new coordopnates are : (%d, %d)\n", square->point->x, square->point->y);
 
@@ -256,12 +257,12 @@ void delete_square(Square_t *square)
 {
     if (square == NULL)
     {
-        return NULL;
+        return;
     }
     else
     {
-        free(square->point->x);
-        free(square->point->y);
+        free(square->point);
+        free(square);
     }
 }
 
@@ -295,10 +296,12 @@ void modify_line(Line_t *line)
 
 {
     printf("The old coordonates of the origin are (%d, %d)\n", line->point1->x, line->point2->y);
+    free(line->point1);
     line->point1 = create_point();
     printf("the new coordonates are : (%d, %d)\n", line->point1->x, line->point2->y);
 
     printf("The coordonates of the second point are : (%d, %d)\n", line->point2->x, line->point2->y);
+    free(line->point2);
     line->point2 = create_point();
     printf("the new coordonates are : (%d, %d)\n", line->point2->x, line->point2->y);
 }
@@ -319,11 +322,12 @@ void delete_line(Line_t *line)
 {
     if (line == NULL)
     {
-        return NULL;
+        return;
     }
     else
     {
         free(line->point1);
         free(line->point2);
+        free(line);
     }
 }
