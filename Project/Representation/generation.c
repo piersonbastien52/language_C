@@ -118,3 +118,35 @@ int supp_node(Landmark_t *chain, unsigned int index) // supression d'un maillon 
   chain->length--;
   return 1;
 }
+
+void free_form(Shape_t *shape)
+{
+  if (shape == NULL)
+  {
+    return;
+  }
+  delete_style(shape->styles);
+
+  switch (shape->type)
+  {
+  case FORM_CIRCLE:
+    delete_circle(shape->data.circle);
+    break;
+
+  case FORM_ELLIPSE:
+    delete_ellipse(shape->data.ellipse);
+    break;
+
+  case FORM_RECTANGLE:
+    delete_rectangle(shape->data.rectangle);
+    break;
+
+  case FORM_SQUARE:
+    delete_square(shape->data.square);
+    break;
+
+  case FORM_LINE:
+    delete_line(shape->data.lines);
+    break;
+  }
+}
