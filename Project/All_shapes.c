@@ -2,21 +2,21 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
-#include "Representation/Points.h"
-#include "Representation/apply_style.h"
-#include "Representation/color.h"
-#include "Representation/ask_for_a_flint.h"
-#include "Representation/Points.h"
-#include "Representation/point.h"
-#include "Representation/styles.h"
-#include "Representation/rectangle.h"
-#include "Representation/circle.h"
-#include "Representation/ellipse.h"
-#include "Representation/line.h"
-#include "Representation/square.h"
-#include "Representation/enum.h"
+#include "Representation/library/Points.h"
+#include "Representation/library/apply_style.h"
+#include "Representation/library/color.h"
+#include "Representation/library/ask_for_a_flint.h"
+#include "Representation/library/Points.h"
+#include "Representation/library/point.h"
+#include "Representation/library/styles.h"
+#include "Representation/library/rectangle.h"
+#include "Representation/library/circle.h"
+#include "Representation/library/ellipse.h"
+#include "Representation/library/line.h"
+#include "Representation/library/square.h"
+#include "Representation/library/enum.h"
 
-Circle_t *create_circle(void) // oà verifier le if circle ==NULL absoluement !! si ca fonctionne l'appliquer aux autres
+Circle_t *create_circle(void)
 {
     Circle_t *circle = malloc(sizeof(Circle_t));
     if (circle == NULL)

@@ -2,23 +2,23 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
-#include "Representation/apply_style.h"
-#include "Representation/color.h"
-#include "Representation/ask_for_a_flint.h"
-#include "Representation/Points.h"
-#include "Representation/point.h"
-#include "Representation/styles.h"
-#include "Representation/rectangle.h"
-#include "Representation/circle.h"
-#include "Representation/ellipse.h"
-#include "Representation/line.h"
-#include "Representation/square.h"
-#include "Representation/enum.h"
+#include "Representation/library/apply_style.h"
+#include "Representation/library/color.h"
+#include "Representation/library/ask_for_a_flint.h"
+#include "Representation/library/Points.h"
+#include "Representation/library/point.h"
+#include "Representation/library/styles.h"
+#include "Representation/library/rectangle.h"
+#include "Representation/library/circle.h"
+#include "Representation/library/ellipse.h"
+#include "Representation/library/line.h"
+#include "Representation/library/square.h"
+#include "Representation/library/enum.h"
 
 int create(void);
-// int editing(void);
-// int charge(void);
-// int visualize(void);
+int editing(void);
+int charge(void);
+int visualize(void);
 
 int main(void)
 {
@@ -38,13 +38,13 @@ int main(void)
         menu_create();
         break;
     case 2:
-        // editing();
+        editing();
         break;
     case 3:
-        // charge();
+        charge();
         break;
     case 4:
-        // visualize();
+        visualize();
         break;
     case 5:
         return 0;
@@ -72,25 +72,22 @@ void menu_create(void)
     switch (choice_1)
     {
     case 1:
-        // input_rectangle;
+        input_rectangle();
         break;
     case 2:
-        // input_square;
+        input_square();
         break;
     case 3:
-        // input_circle;
+        input_circle();
         break;
     case 4:
-        // input_ellipse;
+        input_ellipse();
         break;
     case 5:
-        // input_line;
+        input_line();
         break;
     case 6:
-        // input_polylines
-        break;
-    case 7:
-        // menu();  //où est menu ??
+        menu();
         break;
     default:
         printf("wrong input");
@@ -99,65 +96,27 @@ void menu_create(void)
 }
 
 void menu_create_rotate(void)
-
 {
-
-    int choice_2 = ask_navigation(
-
+    int choice = ask_navigation(
         "1.Effectuer une rotation\n"
-
-        "2.inverser la structure sur l'axe x\n"
-
-        "3.inverser la structure sur l'axe y\n"
-
-        "4.modifier une rotation\n"
-
-        "5.Retour\n"
-
-        "Enter your choice (1-5): \n",
-
-        1, 5);
-
+        "2.modifier une rotation\n"
+        "3.Retour\n"
+        "Enter your choice (1-3): \n",
+        1, 3);
     {
-
-        switch (choice_2)
-
+        switch (choice)
         {
-
         case 1:
-
             create_rotation();
-
             break;
-
         case 2:
-
-            create_flip_x();
-
-            break;
-
-        case 3:
-
-            create_flip_y();
-
-            break;
-
-        case 4:
-
             menu_modify_rotate();
-
             break;
-
-        case 5:
-
+        case 3:
             menu_create();
-
             break;
-
         default:
-
             printf("wrong input");
-
             break;
         }
     }

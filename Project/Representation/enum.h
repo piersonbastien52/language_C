@@ -37,3 +37,5 @@ typedef struct
 } Shape_t;
 
 #endif
+
+j 'ai mes formes -- interragir avec l' utilisateur, avec la création suppression, sur la liste chainée
