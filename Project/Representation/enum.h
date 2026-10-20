@@ -11,7 +11,6 @@
 #include "ellipse.h"
 #include "line.h"
 #include "square.h"
-#include "polylines.h"
 
 typedef enum
 {
@@ -20,7 +19,6 @@ typedef enum
     FORM_CIRCLE,
     FORM_ELLIPSE,
     FORM_LINE,
-    FORM_POLYLINES,
 } Shape_e;
 
 typedef struct
@@ -33,7 +31,7 @@ typedef struct
         Rectangle_t *rectangle;
         Square_t *square;
         Line_t *lines;
-        Polylines_t *polylines;
+
     } data;
     Styles_t *styles;
 } Shape_t;

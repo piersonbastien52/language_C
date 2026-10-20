@@ -13,7 +13,6 @@
 #include "Representation/ellipse.h"
 #include "Representation/line.h"
 #include "Representation/square.h"
-#include "Representation/polylines.h"
 #include "Representation/enum.h"
 
 void clear_stdin(void)

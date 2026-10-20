@@ -13,7 +13,6 @@
 #include "Representation/ellipse.h"
 #include "Representation/line.h"
 #include "Representation/square.h"
-#include "Representation/polylines.h"
 #include "Representation/enum.h"
 
 Point_t *create_point()
@@ -106,6 +105,7 @@ Styles_t *ellipse_styles(void)
         return ellipse;
     }
 }
+
 void modify_ellipse(Ellipse_t *ellipse)
 
 {

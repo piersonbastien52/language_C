@@ -7,67 +7,7 @@
 #include "ellipse.h"
 #include "line.h"
 #include "square.h"
-#include "polylines.h"
 #include "enum.h"
-
-List_polylines_t *add_node(List_polylines_t *chain, Polylines_t *link)
-{
-  if (chain == NULL)
-  {
-    List_polylines_t *new_chain = malloc(sizeof(List_polylines_t));
-    new_chain->start = link;
-    if (link == NULL)
-    {
-      new_chain->length = 0;
-    }
-    else
-    {
-      new_chain->length = 1;
-    }
-    return new_chain;
-  }
-
-  if (link == NULL)
-  {
-    return link;
-  }
-
-  if (chain->start == NULL)
-  {
-    chain->start = link;
-    chain->length++;
-    return chain;
-  }
-
-  Polylines_t *temp = chain->start;
-
-  while (temp->next != NULL)
-  {
-    temp = temp->next;
-  }
-
-  temp->next = link;
-  chain->length++;
-  return chain;
-}
-
-int get_value(List_polylines_t *chain, unsigned int index)
-{
-  if (chain == NULL)
-    return -1;
-  int i = 0;
-  Polylines_t *temp = chain->start;
-  while (i != index && temp != NULL)
-  {
-    temp = temp->next;
-    i++;
-  }
-
-  if (temp == NULL)
-    return -1;
-
-  return temp->next;
-}
 
 typedef struct List_shape_s List_shape_t;
 
@@ -75,7 +15,7 @@ struct List_shape_s
 {
   List_shape_t *next;
   List_shape_t *previous;
-  Shape_s shape;
+  Shape_t shape;
 };
 
 typedef struct Landmark_s
@@ -182,24 +122,3 @@ int supp_node(Landmark_t *chain, unsigned int index) // supression d'un maillon 
   chain->length--;
   return 1;
 }
-/*
-int main(void)
-{
-
-  struct Styles_t my_style;
-
-  FILE *file = fopen("/home/bastien/Documents/Coda_/language_C /Project/Representation/nom_du_fichier.html", "w");
-  fprintf(file, "<svg viewBox=\"-1000 -1000 2000 2000\" xmlns=\"http://www.w3.org/2000/svg\">\n");
-  // modifier le chemin lorsque le dossier de sauvegarde est implémenté
-  if (file == NULL)
-  {
-    perror("Erreur fopen");
-    return 1;
-  }
-
-  fclose(file);
-
-  return EXIT_SUCCESS;
-}
-
-*/
