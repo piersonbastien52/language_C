@@ -1,17 +1,11 @@
 #include "styles.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include "Representation/Points.h"
 
 Styles_t *create_translate(Styles_t *style)
 {
-    Styles_t *move = malloc(sizeof(Styles_t));
-    if (move == NULL)
-    {
-        return NULL;
-    }
-    move->tx = ask_for_int("what i s the tx value of translation ?\n");
-    move->ty = ask_for_int("what i s the ty value of translation ?\n");
-    return move;
+    style->translation = create_point("what is the tx and ty value of translation ?\n");
 }
 
 void create_style(Styles_t *style)
@@ -22,7 +16,7 @@ void create_style(Styles_t *style)
     style->fill_opacity = ask_for_limited_float("what is the fill opacity ?\n", 0, 1);
     style->stroke_width = ask_for_limited_float("what is the stroke width ?\n", 0, 1);
     style->angle = ask_for_limited_int("what angle apply ? ", -360, 360);
-    style->
+    create_translate(style);
 }
 
 void modify_style(Styles_t *style) // voir si oil n'y a pas un moyen de modifierqu'une seule valeur et pas toute, pas besoin de boucle ??

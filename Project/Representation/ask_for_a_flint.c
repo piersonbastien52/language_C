@@ -7,10 +7,6 @@ void clear_stdin(void)
         c = getc(stdin);
 }
 
-int ask_navigation(char *menu, int min, int max)
-{
-    return ask_for_limited_int(menu, min, max);
-}
 int ask_for_int(char *message)
 
 {

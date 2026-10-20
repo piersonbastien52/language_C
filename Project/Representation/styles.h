@@ -1,6 +1,6 @@
 #ifndef STYLE_H
 #define STYLE_H
-#include <stdbool.h>
+#include "point.h"
 
 typedef struct Styles_s
 {
@@ -9,8 +9,7 @@ typedef struct Styles_s
   float stroke_opacity;
   float fill_opacity;
   float stroke_width;
-  int tx;
-  int ty; // tx et ty, sont les coordonnées de translation et angle de rotation
+  Point_t *translation;
   int angle;
 
 } Styles_t;

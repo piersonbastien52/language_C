@@ -193,3 +193,8 @@ void menu_modify_rotate(void)
         }
     }
 }
+
+int ask_navigation(char *menu, int min, int max)
+{
+    return ask_for_limited_int(menu, min, max);
+}

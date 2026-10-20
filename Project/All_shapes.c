@@ -21,7 +21,7 @@ Circle_t *create_circle(void) // oà verifier le if circle ==NULL absoluement !!
     Circle_t *circle = malloc(sizeof(Circle_t));
     if (circle == NULL)
     {
-        return;
+        return NULL;
     }
     circle->r = ask_for_int("what is the circle's radius ?\n");
     circle->center = create_point();
@@ -34,7 +34,7 @@ Styles_t *circle_styles(void)
 
     if (circle == NULL)
     {
-        return;
+        return NULL;
     }
     else
     {
@@ -64,7 +64,7 @@ void print_circle(Circle_t *circle, Shape_t *shape)
     print_style(shape->styles);
 }
 
-void delete_circle(Circle_t *circle)
+void delete_circle(Circle_t *circle, Shape_t *shape)
 {
     if (circle == NULL)
     {
@@ -73,6 +73,7 @@ void delete_circle(Circle_t *circle)
     else
     {
         free(circle->center);
+        delete_style(shape->styles);
         free(circle);
     }
 }
@@ -82,6 +83,10 @@ Ellipse_t *create_ellipse(void)
 {
 
     Ellipse_t *ellipse = malloc(sizeof(Ellipse_t));
+    if (ellipse == NULL)
+    {
+        return NULL;
+    }
     ellipse->rx = ask_for_int("what is the first radius of your ellipse ?\n");
     ellipse->ry = ask_for_int("what is the second radius of your ellipse ?\n");
     ellipse->center = create_point();
@@ -132,7 +137,7 @@ void print_ellipse(Ellipse_t *ellipse, Shape_t *shape)
     print_style(shape->styles);
 }
 
-void delete_ellipse(Ellipse_t *ellipse)
+void delete_ellipse(Ellipse_t *ellipse, Shape_t *shape)
 {
     if (ellipse == NULL)
     {
@@ -141,6 +146,7 @@ void delete_ellipse(Ellipse_t *ellipse)
     else
     {
         free(ellipse->center);
+        delete_style(shape->styles);
         free(ellipse);
     }
 }
@@ -148,6 +154,10 @@ void delete_ellipse(Ellipse_t *ellipse)
 Rectangle_t *create_rectangle(void)
 {
     Rectangle_t *rectangle = malloc(sizeof(Rectangle_t));
+    if (rectangle == NULL)
+    {
+        return NULL;
+    }
     rectangle->point = create_point();
     rectangle->height = ask_for_int("what is the height of the rectangle ?\n");
     rectangle->width = ask_for_int("what is the width of the rectangle ?\n");
@@ -196,7 +206,7 @@ void print_rectangle(Rectangle_t *rectangle, Shape_t *shape)
     print_style(shape->styles);
 }
 
-void delete_rectangle(Rectangle_t *rectangle)
+void delete_rectangle(Rectangle_t *rectangle, Shape_t *shape)
 {
     if (rectangle == NULL)
     {
@@ -205,6 +215,7 @@ void delete_rectangle(Rectangle_t *rectangle)
     else
     {
         free(rectangle->point);
+        delete_style(shape->styles);
         free(rectangle);
     }
 }
@@ -212,6 +223,10 @@ void delete_rectangle(Rectangle_t *rectangle)
 Square_t *create_square(void)
 {
     Square_t *square = malloc(sizeof(Square_t));
+    if (square == NULL)
+    {
+        return NULL;
+    }
     square->point = create_point();
     square->height = ask_for_int("what is the height of the square ?\n");
     return square;
@@ -253,7 +268,7 @@ void print_square(Square_t *square, Shape_t *shape)
     print_style(shape->styles);
 }
 
-void delete_square(Square_t *square)
+void delete_square(Square_t *square, Shape_t *shape)
 {
     if (square == NULL)
     {
@@ -262,6 +277,7 @@ void delete_square(Square_t *square)
     else
     {
         free(square->point);
+        delete_style(shape->styles);
         free(square);
     }
 }
@@ -271,7 +287,10 @@ Line_t *create_ligne(void)
 {
 
     Line_t *line = malloc(sizeof(Line_t));
-
+    if (line == NULL)
+    {
+        return NULL;
+    }
     line->point1 = create_point();
     line->point2 = create_point();
 
@@ -317,7 +336,7 @@ void print_line(Line_t *line, Shape_t *shape)
     print_style(shape->styles);
 }
 
-void delete_line(Line_t *line)
+void delete_line(Line_t *line, Shape_t *shape)
 
 {
     if (line == NULL)
@@ -328,6 +347,7 @@ void delete_line(Line_t *line)
     {
         free(line->point1);
         free(line->point2);
+        delete_style(shape->styles);
         free(line);
     }
 }
