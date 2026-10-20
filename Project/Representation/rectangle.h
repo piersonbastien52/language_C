@@ -4,7 +4,7 @@
 
 typedef struct Rectangle_s
 {
-    Point_t point;
+    Point_t *point;
     int height;
     int width;
 

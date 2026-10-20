@@ -6,7 +6,7 @@ typedef struct Ellipse_s
 {
     int rx;
     int ry;
-    Point_t center;
+    Point_t *center;
 
 } Ellipse_t;
 

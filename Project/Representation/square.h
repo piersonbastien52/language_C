@@ -5,7 +5,7 @@
 typedef struct Square_s
 
 {
-    Point_t point;
+    Point_t *point;
     int height;
 
 } Square_t;

@@ -99,9 +99,10 @@ void menu_create(void)
     case 5:
         // input_line;
         break;
-    case 7:
-    // input_polylines
     case 6:
+        // input_polylines
+        break;
+    case 7:
         // menu();  //où est menu ??
         break;
     default:
