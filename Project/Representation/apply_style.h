@@ -32,7 +32,7 @@ void print_rotation(Styles_t *style);
 void modify_rotation(Styles_t *style);
 void delete_angle(Styles_t *style);
 
-Styles_t *create_translate(void);
+Styles_t *create_translate(Styles_t *style);
 void modify_translate(char *message, Styles_t *style);
 void print_translate(Styles_t *style);
 void delete_translate(Styles_t *style);

@@ -34,8 +34,8 @@ typedef struct
         Square_t *square;
         Line_t *lines;
         Polylines_t *polylines;
-        Styles_t *style;
     } data;
-} Shape_s;
+    Styles_t *styles;
+} Shape_t;
 
 #endif

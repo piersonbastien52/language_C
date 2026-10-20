@@ -149,7 +149,7 @@ void delete_angle(Styles_t *style)
     style->angle = 0;
 }
 
-Styles_t *create_translate(void)
+Styles_t *create_translate(Styles_t *style)
 {
     Styles_t *move = malloc(sizeof(Styles_t));
     if (move == NULL)
