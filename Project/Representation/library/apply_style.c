@@ -1,7 +1,11 @@
+#include "Points.h"
+#include "apply_style.h"
 #include "styles.h"
+#include "color.h"
+#include "ask_for_a_flint.h"
+#include "apply_style.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "Representation/library/Points.h"
 
 Styles_t *create_translate(Styles_t *style)
 {

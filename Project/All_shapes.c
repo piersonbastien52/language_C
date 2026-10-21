@@ -1,12 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
-#include <string.h>
+#include "All_shapes.h"
 #include "Representation/library/Points.h"
 #include "Representation/library/apply_style.h"
 #include "Representation/library/color.h"
 #include "Representation/library/ask_for_a_flint.h"
-#include "Representation/library/Points.h"
 #include "Representation/library/point.h"
 #include "Representation/library/styles.h"
 #include "Representation/library/rectangle.h"
@@ -278,7 +276,7 @@ void delete_square(Square_t *square)
     }
 }
 
-Styles_t *create_line(void)
+Line_t *create_line(void)
 
 {
 

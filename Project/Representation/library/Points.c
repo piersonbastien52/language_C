@@ -1,5 +1,8 @@
+#include "ask_for_a_flint.h"
 #include "point.h"
+#include "Points.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 Point_t *create_point(char *message) // reverifier
 {

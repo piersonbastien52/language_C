@@ -1,4 +1,5 @@
-#include "Representation/enum.h"
+#include "Representation/library/enum.h"
+#include <stdio.h>
 
 void print_shapes_list(Landmark_t *chain)
 {
@@ -35,6 +36,9 @@ void print_shapes_list(Landmark_t *chain)
 
         case FORM_LINE:
             printf("Line\n");
+            break;
+        default:
+            printf("Unknown shape\n");
             break;
         }
 

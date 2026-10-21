@@ -1,7 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include <string.h>
 #include "Representation/library/apply_style.h"
 #include "Representation/library/color.h"
 #include "Representation/library/ask_for_a_flint.h"
@@ -18,7 +15,9 @@
 
 int main(void)
 {
-    main_menu();
+    Landmark_t *chain = NULL; // initialisation de la liste chainée
+
+    main_menu(&chain);
 }
 
 int ask_navigation(char *menu, int min, int max)
@@ -45,16 +44,16 @@ void main_menu(Landmark_t **chain)
         menu_create_shape(chain);
         break;
     case 2:
-        editing();
+        editing(chain);
         break;
     case 3:
         loading();
         break;
     case 4:
-        visualize();
+        visualize(chain);
         break;
     case 5:
-        delete_shape();
+        delete_shape(chain);
         break;
     case 6:
         return 0;
@@ -179,10 +178,10 @@ void modify_coordonates(Landmark_t *chain)
 {
     if (chain == NULL || chain->start == NULL)
     {
-        printf("Any shape saved\n");
+        printf("No shape saved\n");
         return;
     }
-    print_shapes_list(chain);
+    print_shapes_list(chain); // permet au user de voir la liste des formes contenu dans la liste chainée
     unsigned int index = ask_for_limited_int(
         "Which shape would you modify ?\n",
         0,
@@ -221,14 +220,14 @@ void modify_coordonates(Landmark_t *chain)
     }
 }
 
-void modify_styles_applied(Landmark_t *chain) // il sera important de verifier de savoir si l'user sait quel index trouver les formes !!
+void modify_styles_applied(Landmark_t *chain)
 {
     if (chain == NULL || chain->start == NULL)
     {
-        printf("Any shape saved\n");
+        printf("No shape saved\n");
         return;
     }
-    print_shapes_list(chain);
+    print_shapes_list(chain); // permet au user de voir la liste des formes contenu dans la liste chainée
     unsigned int index = ask_for_limited_int(
         "which shape would you modify ?\n",
         0,
@@ -244,27 +243,83 @@ void modify_styles_applied(Landmark_t *chain) // il sera important de verifier d
     modify_style(current->shape.styles);
 }
 
-void visualize(void)
+void visualize(Landmark_t *chain)
 {
+    if (chain == NULL || chain->start == NULL)
+    {
+        printf("No shape saved\n");
+        return;
+    }
+    print_shapes_list(chain); // permet au user de voir la liste des formes contenu dans la liste chainée
+    unsigned int index = ask_for_limited_int(
+        "Which shape would you modify ?\n",
+        0,
+        chain->length - 1);
+
+    List_shape_t *current = chain->start;
+
+    for (unsigned int i = 0; i < index; i++)
+    {
+        current = current->next;
+    }
+
+    Shape_t *shape = &current->shape;
+
+    switch (shape->type)
+    {
+    case FORM_RECTANGLE:
+        print_rectangle(shape->data.rectangle);
+        print_style(shape->styles);
+        break;
+
+    case FORM_SQUARE:
+        print_square(shape->data.square);
+        print_style(shape->styles);
+        break;
+
+    case FORM_CIRCLE:
+        print_circle(shape->data.circle);
+        print_style(shape->styles);
+        break;
+
+    case FORM_ELLIPSE:
+        print_ellipse(shape->data.ellipse);
+        print_style(shape->styles);
+        break;
+
+    case FORM_LINE:
+        print_line(shape->data.line);
+        print_style(shape->styles);
+        break;
+    }
 }
 
-/*
-Cette option permet de parcourir la liste chaînée (Landmark_t)
-du premier au dernier élément pour afficher toutes les formes enregistrées :
- Parcourir les maillons via chain->start.
- Pour chaque maillon, vérifier le type (shape.type) grâce au switch :
- Si FORM_RECTANGLE : appeler print_rectangle(shape.data.rectangle, &shape).
- Si FORM_CIRCLE : appeler print_circle(shape.data.circle, &shape).
- (Idem pour les autres formes et pour afficher le style associé).
- */
-
-void delete_shape()
+void delete_shape(Landmark_t *chain) // regarder si c'est possible de mettre une option leave sans forcément supprimer
 {
+    if (chain == NULL || chain->start == NULL)
+    {
+        printf("No shape saved\n");
+        return;
+    }
+    print_shapes_list(chain); // permet au user de voir la liste des formes contenu dans la liste chainée
+
+    printf("[%u] Return\n", chain->length);
+
+    unsigned int index = ask_for_limited_int(
+        "which shape would you delete ?\n",
+        0,
+        chain->length - 1);
+
+    if (index == chain->length)
+    {
+        return;
+    }
+    if (supp_node(chain, index) == 1)
+    {
+        printf("Shape deleted successfully.\n");
+    }
+    else
+    {
+        printf("Error while deleting shape.\n");
+    }
 }
-/*
-Pour supprimer proprement une forme de la liste :
-Afficher la liste des formes existantes avec leurs indices.
-Demander l'index de la forme à supprimer via ask_for_limited_int.
-Appeler la fonction supp_node(chain, index) que vous avez déjà écrite dans generation.c,
-qui se chargera de libérer la mémoire de la forme, de ses styles et du maillon associé (free_node).
-*/

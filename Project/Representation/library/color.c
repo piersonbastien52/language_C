@@ -1,4 +1,7 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "color.h"
 #include "styles.h"
 
 char *ask_color(char *message)

@@ -1,7 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include "library/enum.h"
+#include "generation.h"
+#include "enum.h"
+#include "library/styles.h"
+#include "library/rectangle.h"
+#include "circle.h"
+#include "ellipse.h"
+#include "line.h"
+#include "square.h"
 
 Landmark_t *add_node(Landmark_t *chain, List_shape_t *link)
 {
@@ -128,13 +135,6 @@ int supp_node(Landmark_t *chain, unsigned int index)
     }
   }
   free_node(current);
-
   chain->length--;
   return 1;
 }
-#include "library/styles.h"
-#include "library/rectangle.h"
-#include "circle.h"
-#include "ellipse.h"
-#include "line.h"
-#include "square.h"

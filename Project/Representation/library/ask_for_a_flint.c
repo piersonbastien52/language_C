@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "ask_for_a_flint.h"
 
 void clear_stdin(void)
 {
