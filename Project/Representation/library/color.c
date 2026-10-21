@@ -15,7 +15,7 @@ char *ask_color(char *message)
 
     while (1)
     {
-        printf("définir la couleur du %s en héxadécimal (ex: #FF0000):\n", message);
+        printf("Define the color of %s in hexadecimal (#FF0000):\n", message);
 
         if (fgets(input_color, sizeof(input_color), stdin) == NULL)
         {
@@ -26,13 +26,13 @@ char *ask_color(char *message)
 
         if (strlen(input_color) != 7) // l'opérateur strlen permet de compter le nombre de caractères
         {
-            printf("wrong input: the input have to be 7 letters long  (ex: #FF0000)\n");
+            printf("Wrong input: the input have to be 7 letters long (#FF0000)\n");
             continue;
         }
 
         if (input_color[0] != '#')
         {
-            printf("wrong input: manquement du caractère '#'\n");
+            printf("Wrong input: missing the '#'\n");
             continue;
         }
 
@@ -42,7 +42,7 @@ char *ask_color(char *message)
             char c = input_color[idx];
             if (!((c >= '0' && c <= '9') || (c >= 'A' && c <= 'F') || (c >= 'a' && c <= 'f')))
             {
-                printf("wrong input: caractères hexadécimaux invalides\n");
+                printf("Invalid input\n");
                 valid = 0;
                 break;
             }
@@ -59,16 +59,16 @@ char *ask_color(char *message)
 char *modify_color(char *message, char *old_color)
 
 {
-    printf("L'ancienne couleur est : %s", old_color);
+    printf("The old color is : %s", old_color);
     free(old_color);
-    return ask_color("quelle est la nouvelle couleur ?\n");
+    return ask_color("What is the new color ?\n");
 }
 
 void print_color(Styles_t *style)
 {
 
-    printf(" la couleur actuelle du fond est :%s\n", style->fill);
-    printf("la couleur actuelle du contour est :%s\n", style->stroke);
+    printf("The old filling color is :%s\n", style->fill);
+    printf("The new filling color is :%s\n", style->stroke);
 }
 
 void delete_color(char *color)

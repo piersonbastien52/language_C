@@ -40,11 +40,11 @@ void modify_style(Styles_t *style) // si j'ai le temps je découperai en plusieu
     style->stroke_opacity = ask_for_limited_float("what is the new stroke opacity ?\n", 0, 1);
     printf("the new stroke opacity is : %f\n", style->stroke_opacity);
     printf("the filling opacity is : %f\n", style->fill_opacity);
-    style->fill_opacity = ask_for_limited_float("what is teh new filling opacity  ?\n", 0, 1);
+    style->fill_opacity = ask_for_limited_float("what is the new filling opacity  ?\n", 0, 1);
     printf("the new filling opacity is : %f\n", style->fill_opacity);
 
     printf("the stroke width is : %f\n", style->stroke_width);
-    style->stroke_width = ask_for_limited_float("whst is the new stroke width ?\n", 0, 1);
+    style->stroke_width = ask_for_limited_float("what is the new stroke width ?\n", 0, 1);
     printf("the new stroke width is: %f\n", style->stroke_width);
 
     printf("the applied angle is : %d\n", style->angle);

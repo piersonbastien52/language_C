@@ -252,7 +252,7 @@ void visualize(Landmark_t *chain)
     }
     print_shapes_list(chain); // permet au user de voir la liste des formes contenu dans la liste chainée
     unsigned int index = ask_for_limited_int(
-        "Which shape would you modify ?\n",
+        "Which shape would you display ?\n",
         0,
         chain->length - 1);
 
@@ -308,7 +308,7 @@ void delete_shape(Landmark_t *chain) // regarder si c'est possible de mettre une
     unsigned int index = ask_for_limited_int(
         "which shape would you delete ?\n",
         0,
-        chain->length - 1);
+        chain->length);
 
     if (index == chain->length)
     {

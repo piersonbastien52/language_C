@@ -19,17 +19,17 @@ Point_t *create_point(char *message) // reverifier
 
 void modify_point(char *message, Point_t *point) // le format des paramètres à input est :("Rectangle_s.x", Rectangle_s.x )
 {
-    printf("Ancienne valeur est %s: (%d, %d)\n", message, point->x, point->y);
-    point->x = ask_for_int("Quelle est la nouvelle valeur ?\n");
-    point->y = ask_for_int("Quelle est la nouvelle valeur ?\n");
-    printf("la nouvelle valeur de x est %d\n", point->x);
-    printf("la nouvelle valeur de y est %d\n", point->y);
+    printf("The old coordonates are %s: (%d, %d)\n", message, point->x, point->y);
+    point->x = ask_for_int("What is the new x coordonate ?\n");
+    point->y = ask_for_int("What is the nex y coordonate ?\n");
+    printf("The new x coordonate is : %d\n", point->x);
+    printf("The new y coordonate is : %d\n", point->y);
 }
 
 void print_a_point(Point_t *point)
 {
-    printf("la valeur de x est : %d\n", point->x);
-    printf(" la valeur de y est : %d\n", point->y);
+    printf("The coordonate x is : %d\n", point->x);
+    printf("The coordonate y is : %d\n", point->y);
 }
 
 void delete_point(Point_t *point)

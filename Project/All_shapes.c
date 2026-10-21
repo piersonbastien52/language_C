@@ -22,7 +22,7 @@ Circle_t *create_circle(void)
         return NULL;
     }
     circle->r = ask_for_int("what is the circle's radius ?\n");
-    circle->center = create_point("whats is the center's coordonates ?\n");
+    circle->center = create_point("what is the center's coordonates ?\n");
     return circle;
 }
 
@@ -286,7 +286,7 @@ Line_t *create_line(void)
         return NULL;
     }
     line->point1 = create_point("What is the coordonates of the first point ?\n");
-    line->point2 = create_point("what is the coordonatesof the second point ?\n");
+    line->point2 = create_point("what is the coordonates of the second point ?\n");
 
     return line;
 }
@@ -311,7 +311,7 @@ void modify_line(Line_t *line)
     printf("The old coordonates of the origin are (%d, %d)\n", line->point1->x, line->point2->y);
     free(line->point1);
     line->point1 = create_point();
-    printf("the new coordonates are : (%d, %d)\n", line->point1->x, line->point2->y);
+    printf("the new coordonates are : (%d, %d)\n", line->point1->x, line->point1->y);
 
     printf("The coordonates of the second point are : (%d, %d)\n", line->point2->x, line->point2->y);
     free(line->point2);
