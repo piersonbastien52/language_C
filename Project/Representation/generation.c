@@ -1,29 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include "styles.h"
-#include "rectangle.h"
-#include "circle.h"
-#include "ellipse.h"
-#include "line.h"
-#include "square.h"
-#include "enum.h"
-
-typedef struct List_shape_s List_shape_t;
-
-struct List_shape_s
-{
-  List_shape_t *next;
-  List_shape_t *previous;
-  Shape_t shape;
-};
-
-typedef struct Landmark_s
-{
-  List_shape_t *start;
-  unsigned int length;
-
-} Landmark_t;
+#include "library/enum.h"
 
 Landmark_t *add_node(Landmark_t *chain, List_shape_t *link)
 {
@@ -73,8 +51,40 @@ void free_node(List_shape_t *node) // libère la mémoire contenu dans le maillo
   {
     return;
   }
-  free_forme(node->shape);
+  free_shape(&node->shape);
   free(node);
+}
+
+void free_shape(Shape_t *shape) // double itération de free, ici et dans all_shapes, trouver comment appeler une des deux fonctions
+{
+  if (shape == NULL)
+  {
+    return;
+  }
+  delete_style(shape->styles);
+
+  switch (shape->type)
+  {
+  case FORM_CIRCLE:
+    delete_circle(shape->data.circle);
+    break;
+
+  case FORM_ELLIPSE:
+    delete_ellipse(shape->data.ellipse);
+    break;
+
+  case FORM_RECTANGLE:
+    delete_rectangle(shape->data.rectangle);
+    break;
+
+  case FORM_SQUARE:
+    delete_square(shape->data.square);
+    break;
+
+  case FORM_LINE:
+    delete_line(shape->data.line);
+    break;
+  }
 }
 
 int supp_node(Landmark_t *chain, unsigned int index) // supression d'un maillon dans la liste chainée
@@ -122,35 +132,9 @@ int supp_node(Landmark_t *chain, unsigned int index) // supression d'un maillon 
   chain->length--;
   return 1;
 }
-
-void free_form(Shape_t *shape)
-{
-  if (shape == NULL)
-  {
-    return;
-  }
-  delete_style(shape->styles);
-
-  switch (shape->type)
-  {
-  case FORM_CIRCLE:
-    delete_circle(shape->data.circle);
-    break;
-
-  case FORM_ELLIPSE:
-    delete_ellipse(shape->data.ellipse);
-    break;
-
-  case FORM_RECTANGLE:
-    delete_rectangle(shape->data.rectangle);
-    break;
-
-  case FORM_SQUARE:
-    delete_square(shape->data.square);
-    break;
-
-  case FORM_LINE:
-    delete_line(shape->data.lines);
-    break;
-  }
-}
+#include "library/styles.h"
+#include "library/rectangle.h"
+#include "circle.h"
+#include "ellipse.h"
+#include "line.h"
+#include "square.h"

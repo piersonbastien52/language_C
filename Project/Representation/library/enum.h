@@ -30,10 +30,26 @@ typedef struct
         Ellipse_t *ellipse;
         Rectangle_t *rectangle;
         Square_t *square;
-        Line_t *lines;
+        Line_t *line;
 
     } data;
     Styles_t *styles;
 } Shape_t;
+
+typedef struct List_shape_s List_shape_t;
+
+struct List_shape_s
+{
+    List_shape_t *next;
+    List_shape_t *previous;
+    Shape_t shape;
+};
+
+typedef struct Landmark_s
+{
+    List_shape_t *start;
+    unsigned int length;
+
+} Landmark_t;
 
 #endif

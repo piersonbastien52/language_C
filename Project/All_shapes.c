@@ -24,7 +24,7 @@ Circle_t *create_circle(void)
         return NULL;
     }
     circle->r = ask_for_int("what is the circle's radius ?\n");
-    circle->center = create_point();
+    circle->center = create_point("whats is the center's coordonates of the center ?\n");
     return circle;
 }
 
@@ -64,7 +64,7 @@ void print_circle(Circle_t *circle, Shape_t *shape)
     print_style(shape->styles);
 }
 
-void delete_circle(Circle_t *circle, Shape_t *shape)
+void delete_circle(Circle_t *circle)
 {
     if (circle == NULL)
     {
@@ -73,7 +73,6 @@ void delete_circle(Circle_t *circle, Shape_t *shape)
     else
     {
         free(circle->center);
-        delete_style(shape->styles);
         free(circle);
     }
 }
@@ -137,7 +136,7 @@ void print_ellipse(Ellipse_t *ellipse, Shape_t *shape)
     print_style(shape->styles);
 }
 
-void delete_ellipse(Ellipse_t *ellipse, Shape_t *shape)
+void delete_ellipse(Ellipse_t *ellipse)
 {
     if (ellipse == NULL)
     {
@@ -146,7 +145,6 @@ void delete_ellipse(Ellipse_t *ellipse, Shape_t *shape)
     else
     {
         free(ellipse->center);
-        delete_style(shape->styles);
         free(ellipse);
     }
 }
@@ -206,7 +204,7 @@ void print_rectangle(Rectangle_t *rectangle, Shape_t *shape)
     print_style(shape->styles);
 }
 
-void delete_rectangle(Rectangle_t *rectangle, Shape_t *shape)
+void delete_rectangle(Rectangle_t *rectangle)
 {
     if (rectangle == NULL)
     {
@@ -215,7 +213,6 @@ void delete_rectangle(Rectangle_t *rectangle, Shape_t *shape)
     else
     {
         free(rectangle->point);
-        delete_style(shape->styles);
         free(rectangle);
     }
 }
@@ -268,7 +265,7 @@ void print_square(Square_t *square, Shape_t *shape)
     print_style(shape->styles);
 }
 
-void delete_square(Square_t *square, Shape_t *shape)
+void delete_square(Square_t *square)
 {
     if (square == NULL)
     {
@@ -277,12 +274,11 @@ void delete_square(Square_t *square, Shape_t *shape)
     else
     {
         free(square->point);
-        delete_style(shape->styles);
         free(square);
     }
 }
 
-Line_t *create_ligne(void)
+Styles_t *create_line(void)
 
 {
 
@@ -297,9 +293,9 @@ Line_t *create_ligne(void)
     return line;
 }
 
-Line_t *line_styles(void)
+Styles_t *line_styles(void)
 {
-    Line_t *line = malloc(sizeof(Line_t));
+    Styles_t *line = malloc(sizeof(Styles_t));
     if (line == NULL)
     {
         return NULL;
@@ -336,7 +332,7 @@ void print_line(Line_t *line, Shape_t *shape)
     print_style(shape->styles);
 }
 
-void delete_line(Line_t *line, Shape_t *shape)
+void delete_line(Line_t *line)
 
 {
     if (line == NULL)
@@ -347,7 +343,6 @@ void delete_line(Line_t *line, Shape_t *shape)
     {
         free(line->point1);
         free(line->point2);
-        delete_style(shape->styles);
         free(line);
     }
 }

@@ -1,7 +1,7 @@
 #include "styles.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "Representation/Points.h"
+#include "Representation/library/Points.h"
 
 Styles_t *create_translate(Styles_t *style)
 {
@@ -19,7 +19,7 @@ void create_style(Styles_t *style)
     create_translate(style);
 }
 
-void modify_style(Styles_t *style) // voir si oil n'y a pas un moyen de modifierqu'une seule valeur et pas toute, pas besoin de boucle ??
+void modify_style(Styles_t *style) // si j'ai le temps je découperai en plusieurs fonction pour le moment non
 {
     printf("the filling color is : %s\n", style->fill);
     free(style->fill);
@@ -34,7 +34,6 @@ void modify_style(Styles_t *style) // voir si oil n'y a pas un moyen de modifier
     printf("the stroke opacity is : %f\n", style->stroke_opacity);
     style->stroke_opacity = ask_for_limited_float("what is the new stroke opacity ?\n", 0, 1);
     printf("the new stroke opacity is : %f\n", style->stroke_opacity);
-
     printf("the filling opacity is : %f\n", style->fill_opacity);
     style->fill_opacity = ask_for_limited_float("what is teh new filling opacity  ?\n", 0, 1);
     printf("the new filling opacity is : %f\n", style->fill_opacity);
@@ -47,12 +46,12 @@ void modify_style(Styles_t *style) // voir si oil n'y a pas un moyen de modifier
     style->angle = ask_for_limited_int("enter a new angle? ", -360, 360);
     printf("the new applied angle is : %d\n", style->angle);
 
-    printf("the old value of tx translation: %d\n", style->tx);
-    printf("the old value of ty translation: %d\n", style->ty);
-    style->tx = ask_for_int("what is the new value of tx ?\n");
-    style->ty = ask_for_int("what is the new value of ty ?\n");
-    printf("the new value of tx is %d\n", style->tx);
-    printf("the nex value of ty is %d\n", style->ty);
+    printf("the old value of tx translation: %d\n", style->translation->x);
+    printf("the old value of ty translation: %d\n", style->translation->y);
+    style->translation->x = ask_for_int("what is the new value of tx ?\n");
+    style->translation->y = ask_for_int("what is the new value of ty ?\n");
+    printf("the new value of tx is %d\n", style->translation->x);
+    printf("the new value of ty is %d\n", style->translation->y);
 }
 
 void print_style(Styles_t *style)
@@ -63,12 +62,16 @@ void print_style(Styles_t *style)
     printf("the filling opacity is : %f\n", style->fill_opacity);
     printf("the stroke width is : %f\n", style->stroke_width);
     printf("the applied angle is : %d\n", style->angle);
-    printf("the tx translation value is : %d\n", style->tx);
-    printf("the ty translation value is : %d\n", style->ty);
+    printf("the tx translation value is : %d\n", style->translation->x);
+    printf("the ty translation value is : %d\n", style->translation->y);
 }
 
 void delete_style(Styles_t *style)
 {
+    if (style == NULL)
+    {
+        return;
+    }
     if (style->fill != NULL)
     {
         free(style->fill);

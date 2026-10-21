@@ -14,6 +14,7 @@
 #include "Representation/library/line.h"
 #include "Representation/library/square.h"
 #include "Representation/library/enum.h"
+#include "Representation/library/generation.h"
 
 int main(void)
 {
@@ -61,11 +62,13 @@ void main_menu(void)
         printf("wrong input");
         break;
     }
-    return 0;
+    return;
 }
 
-void menu_create_shape(void) // pas fini
+void menu_create_shape(void)
 {
+    Shape_t shape;
+
     int choice = ask_navigation(
         "--- CHOOSE A SHAPE ---"
         "1.Rectangle\n"
@@ -81,37 +84,42 @@ void menu_create_shape(void) // pas fini
     {
     case 1:
     {
-        Rectangle_t *rect = create_rectangle();
-        rectangle_styles(rect);
+        shape.type = FORM_RECTANGLE;
+        shape.data.rectangle = create_rectangle();
+        shape.styles = rectangle_styles();
         break;
     }
     case 2:
     {
-        Square_t *sqr = create_square();
-        square_styles(sqr);
+        shape.type = FORM_SQUARE;
+        shape.data.square = create_square();
+        shape.styles = square_styles();
         break;
     }
     case 3:
     {
-        Circle_t *crl = create_circle();
-        circle_styles(crl);
+        shape.type = FORM_CIRCLE;
+        shape.data.circle = create_circle();
+        shape.styles = circle_styles();
         break;
     }
     case 4:
     {
-        Ellipse_t *ellp = create_ellipse();
-        ellipse_styles(ellp);
+        shape.type = FORM_ELLIPSE;
+        shape.data.ellipse = create_ellipse();
+        shape.styles = ellipse_styles();
         break;
     }
     case 5:
     {
-        Line_t *ln = create_line();
-        line_styles(ln);
+        shape.type = FORM_LINE;
+        shape.data.line = create_line();
+        shape.styles = line_styles();
         break;
     }
     case 6:
     {
-        main_menu();
+        return;
     }
     default:
     {
@@ -120,13 +128,6 @@ void menu_create_shape(void) // pas fini
     }
     }
 }
-
-/*
-Enregistrer dans la liste chaînée :Allouer un nouveau maillon (List_shape_t),
-y insérer la structure Shape_t (en renseignant le bon Shape_e type et la bonne union data,
-ainsi que le pointeur styles).   Ajouter ce maillon à votre structure de suivi (Landmark_t)
-à l'aide de la fonction add_node().
-*/
 
 void editing(void)
 {
@@ -142,17 +143,17 @@ void editing(void)
     {
     case 1:
     {
-        modify_coordonates();
+        modify_coordonates(); // attention aux arguments
         break;
     }
     case 2:
     {
-        modify_styles_applied();
+        modify_styles_applied(); // attention aux arguments
         break;
     }
     case 3:
     {
-        main_menu();
+        return;
     }
     default:
     {
@@ -162,108 +163,74 @@ void editing(void)
     }
 }
 
-void modify_coordonates(void)
-{
-    int choice = ask_navigation(
-        "--- MODIFY COORDONATES ---"
-        "1.Rectangle\n"
-        "2.Square\n"
-        "3.Circle\n"
-        "4.Ellipse\n"
-        "5.Line\n"
-        "6.Return\n"
-        "Enter your choice (1-6): \n",
-        1, 6);
+void modify_coordonates(Landmark_t *chain) // il sera important de verifier de savoir si l'user sait quel index trouver les formes !!
 
-    switch (choice)
+{
+    if (chain == NULL || chain->start == NULL)
     {
-    case 1:
+        printf("Any shape saved\n");
+        return;
+    }
+
+    unsigned int index = ask_for_limited_int(
+        "Which shape would you modify ?\n",
+        0,
+        chain->length - 1);
+
+    List_shape_t *current = chain->start;
+
+    for (unsigned int i = 0; i < index; i++)
     {
-        modify_rectangle();
+        current = current->next;
+    }
+
+    Shape_t *shape = &current->shape;
+
+    switch (shape->type)
+    {
+    case FORM_RECTANGLE:
+        modify_rectangle(shape->data.rectangle);
         break;
-    }
-    case 2:
-    {
-        modify_square();
+
+    case FORM_SQUARE:
+        modify_square(shape->data.square);
         break;
-    }
-    case 3:
-    {
-        modify_circle();
+
+    case FORM_CIRCLE:
+        modify_circle(shape->data.circle);
         break;
-    }
-    case 4:
-    {
-        modify_ellipse();
+
+    case FORM_ELLIPSE:
+        modify_ellipse(shape->data.ellipse);
         break;
-    }
-    case 5:
-    {
-        modify_line();
+
+    case FORM_LINE:
+        modify_line(shape->data.line);
         break;
-    }
-    case 6:
-    {
-        editing();
-    }
-    default:
-    {
-        printf("wrong input");
-        break;
-    }
     }
 }
 
-void modify_styles_applied(void)
+void modify_styles_applied(Landmark_t *chain) // il sera important de verifier de savoir si l'user sait quel index trouver les formes !!
 {
-    int choice = ask_navigation(
-        "--- MODIFY STYLES ---"
-        "1.Rectangle\n"
-        "2.Square\n"
-        "3.Circle\n"
-        "4.Ellipse\n"
-        "5.Line\n"
-        "6.Return\n"
-        "Enter your choice (1-6): \n",
-        1, 6);
+    if (chain == NULL || chain->start == NULL)
+    {
+        printf("Any shape saved\n");
+        return;
+    }
 
-    switch (choice)
+    unsigned int index = ask_for_limited_int(
+        "which shape would you modify ?\n",
+        0,
+        chain->length - 1);
+
+    List_shape_t *current = chain->start;
+
+    for (unsigned int i = 0; i < index; i++)
     {
-    case 1:
-    {
-        rectangle_styles();
-        break;
+        current = current->next;
     }
-    case 2:
-    {
-        square_styles();
-        break;
-    }
-    case 3:
-    {
-        circle_styles();
-        break;
-    }
-    case 4:
-    {
-        ellipse_styles();
-        break;
-    }
-    case 5:
-    {
-        line_styles();
-        break;
-    }
-    case 6:
-    {
-        editing();
-    }
-    default:
-    {
-        printf("wrong input");
-        break;
-    }
-    }
+
+    modify_style(current->shape.styles);
 }
 
 void visualize(void)
@@ -280,7 +247,7 @@ du premier au dernier élément pour afficher toutes les formes enregistrées :
  (Idem pour les autres formes et pour afficher le style associé).
  */
 
-void delete_shape();
+void delete_shape()
 {
 }
 /*
