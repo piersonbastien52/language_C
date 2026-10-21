@@ -1,14 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include "Representation/styles.h"
-#include "Representation/rectangle.h"
-#include "Representation/circle.h"
-#include "Representation/ellipse.h"
-#include "Representation/line.h"
-#include "Representation/square.h"
-#include "Representation/polylines.h"
-#include "Representation/enum.h"
+#include "Representation/library/styles.h"
+#include "Representation/library/rectangle.h"
+#include "Representation/library/circle.h"
+#include "Representation/library/ellipse.h"
+#include "Representation/library/line.h"
+#include "Representation/library/square.h"
+#include "Representation/library/enum.h"
 
 int switch_shape_choice(int shape_choice, Shape_e Shape_v)
 {

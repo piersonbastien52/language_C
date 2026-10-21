@@ -69,7 +69,11 @@ Landmark_t *add_node(Landmark_t *chain, List_shape_t *link)
 
 void free_node(List_shape_t *node) // libère la mémoire contenu dans le maillon de shape
 {
-  free_form(node->shape);
+  if (node == NULL)
+  {
+    return;
+  }
+  free_forme(node->shape);
   free(node);
 }
 
