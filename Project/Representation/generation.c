@@ -45,7 +45,7 @@ Landmark_t *add_node(Landmark_t *chain, List_shape_t *link)
   return chain;
 }
 
-void free_node(List_shape_t *node) // libère la mémoire contenu dans le maillon de shape
+void free_node(List_shape_t *node)
 {
   if (node == NULL)
   {
@@ -55,7 +55,7 @@ void free_node(List_shape_t *node) // libère la mémoire contenu dans le maillo
   free(node);
 }
 
-void free_shape(Shape_t *shape) // double itération de free, ici et dans all_shapes, trouver comment appeler une des deux fonctions
+void free_shape(Shape_t *shape)
 {
   if (shape == NULL)
   {
@@ -87,7 +87,7 @@ void free_shape(Shape_t *shape) // double itération de free, ici et dans all_sh
   }
 }
 
-int supp_node(Landmark_t *chain, unsigned int index) // supression d'un maillon dans la liste chainée
+int supp_node(Landmark_t *chain, unsigned int index)
 {
   if (chain == NULL)
     return -1;

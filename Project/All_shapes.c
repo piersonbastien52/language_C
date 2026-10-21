@@ -24,7 +24,7 @@ Circle_t *create_circle(void)
         return NULL;
     }
     circle->r = ask_for_int("what is the circle's radius ?\n");
-    circle->center = create_point("whats is the center's coordonates of the center ?\n");
+    circle->center = create_point("whats is the center's coordonates ?\n");
     return circle;
 }
 
@@ -88,7 +88,7 @@ Ellipse_t *create_ellipse(void)
     }
     ellipse->rx = ask_for_int("what is the first radius of your ellipse ?\n");
     ellipse->ry = ask_for_int("what is the second radius of your ellipse ?\n");
-    ellipse->center = create_point();
+    ellipse->center = create_point("What is the center's coordonates ?\n");
     return ellipse;
 }
 
@@ -156,7 +156,7 @@ Rectangle_t *create_rectangle(void)
     {
         return NULL;
     }
-    rectangle->point = create_point();
+    rectangle->point = create_point("What is the origin's coordonate of the rectangle ?\n");
     rectangle->height = ask_for_int("what is the height of the rectangle ?\n");
     rectangle->width = ask_for_int("what is the width of the rectangle ?\n");
     return rectangle;
@@ -224,7 +224,7 @@ Square_t *create_square(void)
     {
         return NULL;
     }
-    square->point = create_point();
+    square->point = create_point("What is the origin's coordonates of the square ?\n");
     square->height = ask_for_int("what is the height of the square ?\n");
     return square;
 }
@@ -287,8 +287,8 @@ Styles_t *create_line(void)
     {
         return NULL;
     }
-    line->point1 = create_point();
-    line->point2 = create_point();
+    line->point1 = create_point("What is the coordonates of the first point ?\n");
+    line->point2 = create_point("what is the coordonatesof the second point ?\n");
 
     return line;
 }

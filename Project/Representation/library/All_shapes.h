@@ -28,7 +28,7 @@ void modify_square(Square_t *square);
 void print_square(Square_t *square, Shape_t *shape);
 void delete_square(Square_t *square);
 
-Line_t *create_ligne(void);
+Line_t *create_line(void);
 Line_t *line_styles(void);
 void modify_line(Line_t *line);
 void print_line(Line_t *line, Shape_t *shape);

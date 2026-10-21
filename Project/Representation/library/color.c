@@ -5,63 +5,50 @@ char *ask_color(char *message)
 {
     char input_color[20];
     char *verified_color = malloc(sizeof(char) * 8);
-    int i;
+    if (verified_color == NULL)
+    {
+        return NULL;
+    }
 
     while (1)
     {
-        i = 1;
-        printf("définir la couleur du %s en héxadécimal:\n", message);
-        fgets(input_color, sizeof(input_color), stdin);
+        printf("définir la couleur du %s en héxadécimal (ex: #FF0000):\n", message);
+
+        if (fgets(input_color, sizeof(input_color), stdin) == NULL)
         {
-            int i = 0; // lecture
-            int j = 0; // écriture
-
-            while (input_color[i] != '\0')
-            {
-                if (input_color[i] == '\n')
-                {
-                    input_color[i] = '\0';
-                    break;
-                }
-                if (input_color[i] != ' ')
-                {
-                    input_color[j] = input_color[i];
-                    j++;
-                }
-
-                i++;
-            }
-            input_color[j] = '\0';
+            continue;
         }
-        while (input_color[i] != '\0')
-        {
 
-            if (input_color[0] != '#')
+        input_color[strcspn(input_color, "\n")] = '\0'; // permet dans inpout color de supprimer le \n si il existe
+
+        if (strlen(input_color) != 7) // l'opérateur strlen permet de compter le nombre de caractères
+        {
+            printf("wrong input: the input have to be 7 letters long  (ex: #FF0000)\n");
+            continue;
+        }
+
+        if (input_color[0] != '#')
+        {
+            printf("wrong input: manquement du caractère '#'\n");
+            continue;
+        }
+
+        int valid = 1;
+        for (int idx = 1; idx < 7; idx++)
+        {
+            char c = input_color[idx];
+            if (!((c >= '0' && c <= '9') || (c >= 'A' && c <= 'F') || (c >= 'a' && c <= 'f')))
             {
-                printf("wrong input, missing #");
+                printf("wrong input: caractères hexadécimaux invalides\n");
+                valid = 0;
                 break;
             }
-            if (strlen(input_color) != 7)
-            {
-                printf("wrong input");
-                continue;
-            }
-            if ((input_color[i] >= '0' && input_color[i] <= '9') ||
-                (input_color[i] >= 'A' && input_color[i] <= 'F') ||
-                (input_color[i] >= 'a' && input_color[i] <= 'f'))
-            {
-                i++;
-            }
-            else
-            {
-                printf("wrong input");
-                break;
-            }
-            if (input_color[i] == '\0')
-            {
-                strcpy(verified_color, input_color);
-                return verified_color;
-            }
+        }
+
+        if (valid)
+        {
+            strcpy(verified_color, input_color);
+            return verified_color;
         }
     }
 }
@@ -73,12 +60,14 @@ char *modify_color(char *message, char *old_color)
     free(old_color);
     return ask_color("quelle est la nouvelle couleur ?\n");
 }
-int print_color(Styles_t *style)
+
+void print_color(Styles_t *style)
 {
 
     printf(" la couleur actuelle du fond est :%s\n", style->fill);
     printf("la couleur actuelle du contour est :%s\n", style->stroke);
 }
+
 void delete_color(char *color)
 {
     free(color);

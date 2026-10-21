@@ -6,6 +6,7 @@
 Styles_t *create_translate(Styles_t *style)
 {
     style->translation = create_point("what is the tx and ty value of translation ?\n");
+    return style;
 }
 
 void create_style(Styles_t *style)

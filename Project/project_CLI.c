@@ -26,7 +26,7 @@ int ask_navigation(char *menu, int min, int max)
     return ask_for_limited_int(menu, min, max);
 }
 
-void main_menu(void)
+void main_menu(Landmark_t **chain)
 {
     int choice = ask_navigation(
         "--- SHAPE MANAGER ---"
@@ -42,7 +42,7 @@ void main_menu(void)
     switch (choice)
     {
     case 1:
-        menu_create_shape();
+        menu_create_shape(chain);
         break;
     case 2:
         editing();
@@ -55,6 +55,7 @@ void main_menu(void)
         break;
     case 5:
         delete_shape();
+        break;
     case 6:
         return 0;
         break;
@@ -65,10 +66,8 @@ void main_menu(void)
     return;
 }
 
-void menu_create_shape(void)
+void menu_create_shape(Landmark_t **chain)
 {
-    Shape_t shape;
-
     int choice = ask_navigation(
         "--- CHOOSE A SHAPE ---"
         "1.Rectangle\n"
@@ -80,41 +79,51 @@ void menu_create_shape(void)
         "Enter your choice (1-6): \n",
         1, 6);
 
+    List_shape_t *new_node = malloc(sizeof(List_shape_t));
+    if (new_node == NULL)
+    {
+        printf("Error during the creation of a new link\n");
+        return;
+    }
+
+    new_node->next = NULL;
+    new_node->previous = NULL;
+
     switch (choice)
     {
     case 1:
     {
-        shape.type = FORM_RECTANGLE;
-        shape.data.rectangle = create_rectangle();
-        shape.styles = rectangle_styles();
+        new_node->shape.type = FORM_RECTANGLE;
+        new_node->shape.data.rectangle = create_rectangle();
+        new_node->shape.styles = rectangle_styles();
         break;
     }
     case 2:
     {
-        shape.type = FORM_SQUARE;
-        shape.data.square = create_square();
-        shape.styles = square_styles();
+        new_node->shape.type = FORM_SQUARE;
+        new_node->shape.data.square = create_square();
+        new_node->shape.styles = square_styles();
         break;
     }
     case 3:
     {
-        shape.type = FORM_CIRCLE;
-        shape.data.circle = create_circle();
-        shape.styles = circle_styles();
+        new_node->shape.type = FORM_CIRCLE;
+        new_node->shape.data.circle = create_circle();
+        new_node->shape.styles = circle_styles();
         break;
     }
     case 4:
     {
-        shape.type = FORM_ELLIPSE;
-        shape.data.ellipse = create_ellipse();
-        shape.styles = ellipse_styles();
+        new_node->shape.type = FORM_ELLIPSE;
+        new_node->shape.data.ellipse = create_ellipse();
+        new_node->shape.styles = ellipse_styles();
         break;
     }
     case 5:
     {
-        shape.type = FORM_LINE;
-        shape.data.line = create_line();
-        shape.styles = line_styles();
+        new_node->shape.type = FORM_LINE;
+        new_node->shape.data.line = create_line();
+        new_node->shape.styles = line_styles();
         break;
     }
     case 6:
@@ -122,14 +131,16 @@ void menu_create_shape(void)
         return;
     }
     default:
-    {
-        printf("wrong input");
-        break;
+        free(new_node);
+        return;
     }
-    }
+
+    *chain = add_node(*chain, new_node);
+
+    printf("The shape is created with success!\n");
 }
 
-void editing(void)
+void editing(Landmark_t **chain)
 {
     int choice = ask_navigation(
         "--- MODIFYING ---"
@@ -143,12 +154,12 @@ void editing(void)
     {
     case 1:
     {
-        modify_coordonates(); // attention aux arguments
+        modify_coordonates(chain);
         break;
     }
     case 2:
     {
-        modify_styles_applied(); // attention aux arguments
+        modify_styles_applied(chain);
         break;
     }
     case 3:
@@ -163,7 +174,7 @@ void editing(void)
     }
 }
 
-void modify_coordonates(Landmark_t *chain) // il sera important de verifier de savoir si l'user sait quel index trouver les formes !!
+void modify_coordonates(Landmark_t *chain)
 
 {
     if (chain == NULL || chain->start == NULL)
@@ -171,7 +182,7 @@ void modify_coordonates(Landmark_t *chain) // il sera important de verifier de s
         printf("Any shape saved\n");
         return;
     }
-
+    print_shapes_list(chain);
     unsigned int index = ask_for_limited_int(
         "Which shape would you modify ?\n",
         0,
@@ -217,7 +228,7 @@ void modify_styles_applied(Landmark_t *chain) // il sera important de verifier d
         printf("Any shape saved\n");
         return;
     }
-
+    print_shapes_list(chain);
     unsigned int index = ask_for_limited_int(
         "which shape would you modify ?\n",
         0,
