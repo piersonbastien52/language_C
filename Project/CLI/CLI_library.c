@@ -1,5 +1,18 @@
+/**
+ * @file CLI_library.c
+ * @brief Implementation of the Command Line Interface (CLI) library.
+ * @details Implements the interactive menus and input flows for managing geometric shapes,
+ *          handling user selection, and interfacing with underlying list operations.
+ */
+
 #include "Representation/library/enum.h"
 #include <stdio.h>
+
+/**
+
+ * @brief Displays list of the stored shapes and index on list container.
+ * @param chain Pointer to the Landmark_t linked list container.
+ */
 
 void print_shapes_list(Landmark_t *chain)
 {

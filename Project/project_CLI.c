@@ -1,3 +1,8 @@
+/**
+ * @file project_CLI.c
+ * @brief Command Line Interface (CLI) implementation for managing geometric shapes and their styles.
+ */
+
 #include <stdio.h>
 #include "Representation/library/apply_style.h"
 #include "Representation/library/color.h"
@@ -13,6 +18,12 @@
 #include "Representation/library/enum.h"
 #include "Representation/library/generation.h"
 
+/**
+ * @brief Main entry point of the CLI application.
+ * @details Initializes the shape list container and launches the interactive main menu loop.
+ * @return 0 on successful application termination.
+ */
+
 int main(void)
 {
     Landmark_t *chain = NULL; // initialisation de la liste chainée
@@ -24,6 +35,11 @@ int ask_navigation(char *menu, int min, int max)
 {
     return ask_for_limited_int(menu, min, max);
 }
+
+/**
+ * @brief Displays the main navigation menu and routes user selections to corresponding submenus.
+ * @param chain Pointer to the Landmark_t linked list container managing all active shapes.
+ */
 
 void main_menu(Landmark_t **chain)
 {
@@ -64,6 +80,11 @@ void main_menu(Landmark_t **chain)
     }
     return;
 }
+
+/**
+ * @brief Displays the shape creation menu and handles insertion of new shapes into the list.
+ * @param chain Pointer to the Landmark_t linked list container.
+ */
 
 void menu_create_shape(Landmark_t **chain)
 {
@@ -139,6 +160,11 @@ void menu_create_shape(Landmark_t **chain)
     printf("The shape is created with success!\n");
 }
 
+/**
+ * @brief Displays the shape modification menu allowing users to edit shape attributes or styles.
+ * @param chain Pointer to the Landmark_t linked list container.
+ */
+
 void editing(Landmark_t **chain)
 {
     int choice = ask_navigation(
@@ -188,7 +214,10 @@ void modify_coordonates(Landmark_t *chain)
         chain->length - 1);
 
     List_shape_t *current = chain->start;
-
+    /**
+     * @brief Displays the shape modification menu allowing users to edit shape attributes or styles.
+     * @param chain Pointer to the Landmark_t linked list container.
+     */
     for (unsigned int i = 0; i < index; i++)
     {
         current = current->next;
@@ -243,6 +272,11 @@ void modify_styles_applied(Landmark_t *chain)
     modify_style(current->shape.styles);
 }
 
+/**
+ * @brief Displays details and style properties of a selected shape from the linked list.
+ * @param chain Pointer to the Landmark_t linked list container.
+ */
+
 void visualize(Landmark_t *chain)
 {
     if (chain == NULL || chain->start == NULL)
@@ -293,6 +327,11 @@ void visualize(Landmark_t *chain)
         break;
     }
 }
+
+/**
+ * @brief Interactively prompts user to select and delete a shape from the list.
+ * @param chain Pointer to the Landmark_t linked list container.
+ */
 
 void delete_shape(Landmark_t *chain) // regarder si c'est possible de mettre une option leave sans forcément supprimer
 {

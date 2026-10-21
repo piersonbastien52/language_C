@@ -1,8 +1,19 @@
+/**
+ * @file color.c
+ * @brief Functions for validating, reading, modifying, and printing hexadecimal colors.
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "color.h"
 #include "styles.h"
+
+/**
+ * @brief Prompts the user until a valid hexadecimal color (#RRGGBB) is provided.
+ * @param message Description string used in prompt.
+ * @return Pointer to dynamically allocated 8-byte string containing validated color.
+ */
 
 char *ask_color(char *message)
 {
@@ -56,6 +67,13 @@ char *ask_color(char *message)
     }
 }
 
+/**
+ * @brief Frees previous color string and requests a new color string from user.
+ * @param message Prompt text.
+ * @param old_color Pointer to dynamically allocated string of old color.
+ * @return Pointer to newly allocated validated color string.
+ */
+
 char *modify_color(char *message, char *old_color)
 
 {
@@ -64,12 +82,22 @@ char *modify_color(char *message, char *old_color)
     return ask_color("What is the new color ?\n");
 }
 
+/**
+ * @brief Prints fill and stroke colors of a style structure.
+ * @param style Pointer to Styles_t structure.
+ */
+
 void print_color(Styles_t *style)
 {
 
     printf("The old filling color is :%s\n", style->fill);
     printf("The new filling color is :%s\n", style->stroke);
 }
+
+/**
+ * @brief Deallocates color string buffer.
+ * @param color Pointer to allocated string.
+ */
 
 void delete_color(char *color)
 {

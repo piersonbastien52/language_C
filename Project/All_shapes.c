@@ -1,3 +1,8 @@
+/**
+ * @file All_shapes.c
+ * @brief Implementation of shape creation, modification, printing, and deletion routines.
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "All_shapes.h"
@@ -14,6 +19,11 @@
 #include "Representation/library/square.h"
 #include "Representation/library/enum.h"
 
+/**
+ * @brief Prompts user for input and creates a new Circle object.
+ * @return Pointer to dynamically allocated Circle_t structure, or NULL on allocation failure.
+ */
+
 Circle_t *create_circle(void)
 {
     Circle_t *circle = malloc(sizeof(Circle_t));
@@ -25,6 +35,11 @@ Circle_t *create_circle(void)
     circle->center = create_point("what is the center's coordonates ?\n");
     return circle;
 }
+
+/**
+ * @brief Allocates and initializes styles for a Circle.
+ * @return Pointer to newly created Styles_t structure.
+ */
 
 Styles_t *circle_styles(void)
 {
@@ -41,6 +56,11 @@ Styles_t *circle_styles(void)
     }
 }
 
+/**
+ * @brief Interactively modifies radius and center coordinates of a Circle.
+ * @param circle Pointer to the Circle_t instance to modify.
+ */
+
 void modify_circle(Circle_t *circle)
 {
     printf("The center's coordonates are :(%d, %d)\n", circle->center->x, circle->center->y);
@@ -53,6 +73,12 @@ void modify_circle(Circle_t *circle)
     printf("the new radius is : %d\n", circle->r);
 }
 
+/**
+ * @brief Displays the attributes and styles of a Circle.
+ * @param circle Pointer to the Circle_t instance.
+ * @param shape Pointer to the parent Shape_t structure.
+ */
+
 void print_circle(Circle_t *circle, Shape_t *shape)
 {
     printf("---Parameters of Circle---\n");
@@ -61,6 +87,11 @@ void print_circle(Circle_t *circle, Shape_t *shape)
     printf("The value of the coordonate x of the center is :%d\n", circle->center->y);
     print_style(shape->styles);
 }
+
+/**
+ * @brief Frees all memory associated with a Circle_t instance.
+ * @param circle Pointer to the Circle_t instance to delete.
+ */
 
 void delete_circle(Circle_t *circle)
 {
@@ -74,6 +105,11 @@ void delete_circle(Circle_t *circle)
         free(circle);
     }
 }
+
+/**
+ * @brief Prompts user for input and creates a new Ellipse object.
+ * @return Pointer to dynamically allocated Ellipse_t structure.
+ */
 
 Ellipse_t *create_ellipse(void)
 
@@ -90,6 +126,11 @@ Ellipse_t *create_ellipse(void)
     return ellipse;
 }
 
+/**
+ * @brief Allocates and initializes styles for an Ellipse.
+ * @return Pointer to newly created Styles_t structure.
+ */
+
 Styles_t *ellipse_styles(void)
 
 {
@@ -105,6 +146,11 @@ Styles_t *ellipse_styles(void)
         return ellipse;
     }
 }
+
+/**
+ * @brief Interactively modifies horizontal/vertical radii and center coordinates of an Ellipse.
+ * @param ellipse Pointer to the Ellipse_t instance to modify.
+ */
 
 void modify_ellipse(Ellipse_t *ellipse)
 
@@ -123,6 +169,12 @@ void modify_ellipse(Ellipse_t *ellipse)
     printf("the new radius is : %d\n", ellipse->ry);
 }
 
+/**
+ * @brief Displays attributes and styles of an Ellipse.
+ * @param ellipse Pointer to the Ellipse_t instance.
+ * @param shape Pointer to the parent Shape_t structure.
+ */
+
 void print_ellipse(Ellipse_t *ellipse, Shape_t *shape)
 
 {
@@ -133,6 +185,11 @@ void print_ellipse(Ellipse_t *ellipse, Shape_t *shape)
     printf("The value of the coordonate y of the center is :%d\n", ellipse->center->y);
     print_style(shape->styles);
 }
+
+/**
+ * @brief Frees memory associated with an Ellipse_t instance.
+ * @param ellipse Pointer to the Ellipse_t instance to delete.
+ */
 
 void delete_ellipse(Ellipse_t *ellipse)
 {
@@ -147,6 +204,11 @@ void delete_ellipse(Ellipse_t *ellipse)
     }
 }
 
+/**
+ * @brief Prompts user for input and creates a new Rectangle object.
+ * @return Pointer to dynamically allocated Rectangle_t structure.
+ */
+
 Rectangle_t *create_rectangle(void)
 {
     Rectangle_t *rectangle = malloc(sizeof(Rectangle_t));
@@ -159,6 +221,11 @@ Rectangle_t *create_rectangle(void)
     rectangle->width = ask_for_int("what is the width of the rectangle ?\n");
     return rectangle;
 }
+
+/**
+ * @brief Allocates and initializes styles for a Rectangle.
+ * @return Pointer to newly created Styles_t structure.
+ */
 
 Styles_t *rectangle_styles(void)
 {
@@ -174,6 +241,11 @@ Styles_t *rectangle_styles(void)
         return rectangle;
     }
 }
+
+/**
+ * @brief Interactively modifies origin point, height, and width of a Rectangle.
+ * @param rectangle Pointer to the Rectangle_t instance to modify.
+ */
 
 void modify_rectangle(Rectangle_t *rectangle)
 {
@@ -191,16 +263,26 @@ void modify_rectangle(Rectangle_t *rectangle)
     printf("the new width is : %d\n", rectangle->width);
 }
 
+/**
+ * @brief Displays attributes and styles of a Rectangle.
+ * @param rectangle Pointer to the Rectangle_t instance.
+ * @param shape Pointer to the parent Shape_t structure.
+ */
+
 void print_rectangle(Rectangle_t *rectangle, Shape_t *shape)
 
 {
-
     printf("---Parameters of rectangle---\n");
     printf("The value of the origin's coordonates are :(%d, %d)\n", rectangle->point->x, rectangle->point->y);
     printf("the height of the rectangle is : %d\n", rectangle->height);
     printf("The width of the rectangle is  :%d\n", rectangle->width);
     print_style(shape->styles);
 }
+
+/**
+ * @brief Frees memory associated with a Rectangle_t instance.
+ * @param rectangle Pointer to the Rectangle_t instance to delete.
+ */
 
 void delete_rectangle(Rectangle_t *rectangle)
 {
@@ -215,6 +297,11 @@ void delete_rectangle(Rectangle_t *rectangle)
     }
 }
 
+/**
+ * @brief Prompts user for input and creates a new Square object.
+ * @return Pointer to dynamically allocated Square_t structure.
+ */
+
 Square_t *create_square(void)
 {
     Square_t *square = malloc(sizeof(Square_t));
@@ -226,6 +313,11 @@ Square_t *create_square(void)
     square->height = ask_for_int("what is the height of the square ?\n");
     return square;
 }
+
+/**
+ * @brief Allocates and initializes styles for a Square.
+ * @return Pointer to newly created Styles_t structure.
+ */
 
 Styles_t *square_styles(void)
 {
@@ -242,6 +334,11 @@ Styles_t *square_styles(void)
     }
 }
 
+/**
+ * @brief Interactively modifies origin point and side length of a Square.
+ * @param square Pointer to the Square_t instance to modify.
+ */
+
 void modify_square(Square_t *square)
 {
     printf("The old coordonates of the origin are (%d, %d)\n", square->point->x, square->point->y);
@@ -254,6 +351,12 @@ void modify_square(Square_t *square)
     printf("the new height is : %d\n", square->height);
 }
 
+/**
+ * @brief Displays attributes and styles of a Square.
+ * @param square Pointer to the Square_t instance.
+ * @param shape Pointer to the parent Shape_t structure.
+ */
+
 void print_square(Square_t *square, Shape_t *shape)
 
 {
@@ -262,6 +365,11 @@ void print_square(Square_t *square, Shape_t *shape)
     printf("The height if the square is : %d\n", square->height);
     print_style(shape->styles);
 }
+
+/**
+ * @brief Frees memory associated with a Square_t instance.
+ * @param square Pointer to the Square_t instance to delete.
+ */
 
 void delete_square(Square_t *square)
 {
@@ -275,6 +383,11 @@ void delete_square(Square_t *square)
         free(square);
     }
 }
+
+/**
+ * @brief Prompts user for input and creates a new Line object.
+ * @return Pointer to dynamically allocated Line_t structure.
+ */
 
 Line_t *create_line(void)
 
@@ -291,6 +404,11 @@ Line_t *create_line(void)
     return line;
 }
 
+/**
+ * @brief Allocates and initializes styles for a Line.
+ * @return Pointer to newly created Styles_t structure.
+ */
+
 Styles_t *line_styles(void)
 {
     Styles_t *line = malloc(sizeof(Styles_t));
@@ -304,6 +422,11 @@ Styles_t *line_styles(void)
         return line;
     }
 }
+
+/**
+ * @brief Interactively modifies start and end point coordinates of a Line.
+ * @param line Pointer to the Line_t instance to modify.
+ */
 
 void modify_line(Line_t *line)
 
@@ -319,6 +442,12 @@ void modify_line(Line_t *line)
     printf("the new coordonates are : (%d, %d)\n", line->point2->x, line->point2->y);
 }
 
+/**
+ * @brief Displays coordinates and styles of a Line.
+ * @param line Pointer to the Line_t instance.
+ * @param shape Pointer to the parent Shape_t structure.
+ */
+
 void print_line(Line_t *line, Shape_t *shape)
 
 {
@@ -329,6 +458,11 @@ void print_line(Line_t *line, Shape_t *shape)
     printf("The coordonates of the second point are :(%d, %d)\n", line->point2->x, line->point2->y);
     print_style(shape->styles);
 }
+
+/**
+ * @brief Frees memory associated with a Line_t instance.
+ * @param line Pointer to the Line_t instance to delete.
+ */
 
 void delete_line(Line_t *line)
 

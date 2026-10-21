@@ -1,3 +1,8 @@
+/**
+ * @file generation.c
+ * @brief Linked list management and shape memory deallocation functions.
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -9,6 +14,13 @@
 #include "ellipse.h"
 #include "line.h"
 #include "square.h"
+
+/**
+ * @brief Appends a new node to the shape container list.
+ * @param chain Pointer to the head container (Landmark_t).
+ * @param link Pointer to the new node (List_shape_t) to append.
+ * @return Pointer to the updated Landmark_t container.
+ */
 
 Landmark_t *add_node(Landmark_t *chain, List_shape_t *link)
 {
@@ -52,6 +64,11 @@ Landmark_t *add_node(Landmark_t *chain, List_shape_t *link)
   return chain;
 }
 
+/**
+ * @brief Frees a list node and its embedded shape data.
+ * @param node Pointer to the node to free.
+ */
+
 void free_node(List_shape_t *node)
 {
   if (node == NULL)
@@ -61,6 +78,11 @@ void free_node(List_shape_t *node)
   free_shape(&node->shape);
   free(node);
 }
+
+/**
+ * @brief Frees shape data and associated style structures based on shape type.
+ * @param shape Pointer to the Shape_t structure to destroy.
+ */
 
 void free_shape(Shape_t *shape)
 {
@@ -93,6 +115,13 @@ void free_shape(Shape_t *shape)
     break;
   }
 }
+
+/**
+ * @brief Removes a node at a specified index from the list.
+ * @param chain Pointer to the Landmark_t container.
+ * @param index Zero-based index of the node to remove.
+ * @return 1 on success, -1 on invalid index or NULL chain.
+ */
 
 int supp_node(Landmark_t *chain, unsigned int index)
 {

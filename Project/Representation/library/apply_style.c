@@ -1,3 +1,8 @@
+/**
+ * @file apply_style.c
+ * @brief Interactive configuration and management of graphical styles.
+ */
+
 #include "Points.h"
 #include "apply_style.h"
 #include "styles.h"
@@ -7,11 +12,22 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/**
+ * @brief Prompts user for translation coordinates and sets them in the style structure.
+ * @param style Pointer to the target Styles_t instance.
+ * @return Pointer to the modified Styles_t structure.
+ */
+
 Styles_t *create_translate(Styles_t *style)
 {
     style->translation = create_point("what is the tx and ty value of translation ?\n");
     return style;
 }
+
+/**
+ * @brief Interactively populates all style fields (colors, opacity, stroke, rotation, translation).
+ * @param style Pointer to the Styles_t structure to initialize.
+ */
 
 void create_style(Styles_t *style)
 {
@@ -23,6 +39,11 @@ void create_style(Styles_t *style)
     style->angle = ask_for_limited_int("what angle apply ? ", -360, 360);
     create_translate(style);
 }
+
+/**
+ * @brief Interactively updates existing style fields with user feedback.
+ * @param style Pointer to the Styles_t structure to modify.
+ */
 
 void modify_style(Styles_t *style) // si j'ai le temps je découperai en plusieurs fonction pour le moment non
 {
@@ -59,6 +80,11 @@ void modify_style(Styles_t *style) // si j'ai le temps je découperai en plusieu
     printf("the new value of ty is %d\n", style->translation->y);
 }
 
+/**
+ * @brief Prints current style values to standard output.
+ * @param style Pointer to the Styles_t structure to display.
+ */
+
 void print_style(Styles_t *style)
 {
     printf("the filling color is : %s\n", style->fill);
@@ -70,6 +96,11 @@ void print_style(Styles_t *style)
     printf("the tx translation value is : %d\n", style->translation->x);
     printf("the ty translation value is : %d\n", style->translation->y);
 }
+
+/**
+ * @brief Deallocates memory associated with fill and stroke strings and the style structure itself.
+ * @param style Pointer to the Styles_t structure to delete.
+ */
 
 void delete_style(Styles_t *style)
 {
