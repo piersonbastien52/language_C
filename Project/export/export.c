@@ -1,11 +1,12 @@
 #include "../Representation/library/generation.h"
 #include <stdio.h>
 #include <string.h>
+#include "export.h"
 
 int export_svg(Landmark_t *landmark)
 
 {
-    FILE *file = fopen("../file_name.svg", "w");
+    FILE *file = fopen("file_name.svg", "w");
 
     if (file == NULL)
     {

@@ -299,6 +299,9 @@ void visualize(Landmark_t *chain)
         return;
     }
     print_shapes_list(chain); // permet au user de voir la liste des formes contenu dans la liste chainée
+
+    int export_svg(Landmark_t * landmark);
+
     unsigned int index = ask_for_limited_int(
         "Which shape would you display ?\n",
         0,
@@ -340,7 +343,6 @@ void visualize(Landmark_t *chain)
         print_style(shape->styles);
         break;
     }
-    int export_svg(Landmark_t * landmark, const char *file_name);
 }
 
 /**
