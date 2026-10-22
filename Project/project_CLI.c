@@ -326,6 +326,7 @@ void visualize(Landmark_t *chain)
         print_style(shape->styles);
         break;
     }
+    int export_svg(Landmark_t * landmark, const char *file_name);
 }
 
 /**
