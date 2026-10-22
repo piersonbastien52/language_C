@@ -65,7 +65,7 @@ void modify_circle(Circle_t *circle)
 {
     printf("The center's coordonates are :(%d, %d)\n", circle->center->x, circle->center->y);
     free(circle->center);
-    circle->center = create_point();
+    circle->center = create_point("Define new coordonates for the center of the circle\n");
     printf("the new coordonates are : (%d, %d)\n", circle->center->x, circle->center->y);
 
     printf("The old value of the radius is %d\n", circle->r);
@@ -157,7 +157,7 @@ void modify_ellipse(Ellipse_t *ellipse)
 {
     printf("The center's coordonates are :(%d, %d)\n", ellipse->center->x, ellipse->center->y);
     free(ellipse->center);
-    ellipse->center = create_point();
+    ellipse->center = create_point("Define new coordonates for the center of thy ellipse\n");
     printf("the new coordonates are : (%d, %d)\n", ellipse->center->x, ellipse->center->y);
 
     printf("The old value of the first radius is %d\n", ellipse->rx);
@@ -251,7 +251,7 @@ void modify_rectangle(Rectangle_t *rectangle)
 {
     printf("The old coordonates of the origin are (%d, %d)\n", rectangle->point->x, rectangle->point->y);
     free(rectangle->point);
-    rectangle->point = create_point();
+    rectangle->point = create_point("Define new coordonates for the origins of the rectangle\n");
     printf("the new coordopnates are : (%d, %d)\n", rectangle->point->x, rectangle->point->y);
 
     printf("The old value of the height is %d\n", rectangle->height);
@@ -343,7 +343,7 @@ void modify_square(Square_t *square)
 {
     printf("The old coordonates of the origin are (%d, %d)\n", square->point->x, square->point->y);
     free(square->point);
-    square->point = create_point();
+    square->point = create_point("Define new coordonates for the origin of the square\n");
     printf("the new coordopnates are : (%d, %d)\n", square->point->x, square->point->y);
 
     printf("The old value of the height is %d\n", square->height);
@@ -433,12 +433,12 @@ void modify_line(Line_t *line)
 {
     printf("The old coordonates of the origin are (%d, %d)\n", line->point1->x, line->point2->y);
     free(line->point1);
-    line->point1 = create_point();
+    line->point1 = create_point("Define new coordonates for the first point of the line\n");
     printf("the new coordonates are : (%d, %d)\n", line->point1->x, line->point1->y);
 
     printf("The coordonates of the second point are : (%d, %d)\n", line->point2->x, line->point2->y);
     free(line->point2);
-    line->point2 = create_point();
+    line->point2 = create_point("Define new coordonates for the second point of the line\n");
     printf("the new coordonates are : (%d, %d)\n", line->point2->x, line->point2->y);
 }
 

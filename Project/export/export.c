@@ -1,5 +1,5 @@
 #include "../Representation/generation.c"
-#include "enum.h"
+#include "../Representation/library/generation.h"
 #include <stdio.h>
 #include <string.h>
 

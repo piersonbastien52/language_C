@@ -7,13 +7,13 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include "library/generation.h"
-#include "enum.h"
+#include "library/enum.h"
 #include "library/styles.h"
 #include "library/rectangle.h"
-#include "circle.h"
-#include "ellipse.h"
-#include "line.h"
-#include "square.h"
+#include "library/circle.h"
+#include "library/ellipse.h"
+#include "library/line.h"
+#include "library/square.h"
 
 /**
  * @brief Appends a new node to the shape container list.

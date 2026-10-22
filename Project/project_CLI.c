@@ -4,7 +4,7 @@
  */
 
 #include <stdio.h>
-#include "Project/export/export.h"
+#include "export/export.h"
 #include "Representation/library/apply_style.h"
 #include "Representation/library/color.h"
 #include "Representation/library/ask_for_a_flint.h"
