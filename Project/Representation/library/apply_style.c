@@ -33,10 +33,10 @@ void create_style(Styles_t *style)
 {
     style->fill = ask_color("what is the filling color ?\n");
     style->stroke = ask_color("what is the stroke color ?\n");
-    style->stroke_opacity = ask_for_limited_float("what is the stroke opacity ?\n", 0, 1);
-    style->fill_opacity = ask_for_limited_float("what is the fill opacity ?\n", 0, 1);
-    style->stroke_width = ask_for_limited_float("what is the stroke width ?\n", 0, 1);
-    style->angle = ask_for_limited_int("what angle apply ? ", -360, 360);
+    style->stroke_opacity = ask_for_limited_float("what is the stroke opacity (0 to 1) ?\n", 0, 1);
+    style->fill_opacity = ask_for_limited_float("what is the fill opacity (0 to 1) ?\n", 0, 1);
+    style->stroke_width = ask_for_limited_float("what is the stroke width (0 to 1) ?\n", 0, 1);
+    style->angle = ask_for_limited_int("what angle apply (-360° to 360) ?\n", -360, 360);
     create_translate(style);
 }
 
@@ -58,18 +58,18 @@ void modify_style(Styles_t *style) // si j'ai le temps je découperai en plusieu
     printf("the new stroke color is : %s\n", style->stroke);
 
     printf("the stroke opacity is : %f\n", style->stroke_opacity);
-    style->stroke_opacity = ask_for_limited_float("what is the new stroke opacity ?\n", 0, 1);
+    style->stroke_opacity = ask_for_limited_float("what is the new stroke opacity (0 to 1) ?\n", 0, 1);
     printf("the new stroke opacity is : %f\n", style->stroke_opacity);
     printf("the filling opacity is : %f\n", style->fill_opacity);
-    style->fill_opacity = ask_for_limited_float("what is the new filling opacity  ?\n", 0, 1);
+    style->fill_opacity = ask_for_limited_float("what is the new filling opacity (0 to 1) ?\n", 0, 1);
     printf("the new filling opacity is : %f\n", style->fill_opacity);
 
     printf("the stroke width is : %f\n", style->stroke_width);
-    style->stroke_width = ask_for_limited_float("what is the new stroke width ?\n", 0, 1);
+    style->stroke_width = ask_for_limited_float("what is the new stroke width (0 to 1) ?\n", 0, 1);
     printf("the new stroke width is: %f\n", style->stroke_width);
 
     printf("the applied angle is : %d\n", style->angle);
-    style->angle = ask_for_limited_int("enter a new angle? ", -360, 360);
+    style->angle = ask_for_limited_int("enter a new angle? (-360 to 360)", -360, 360);
     printf("the new applied angle is : %d\n", style->angle);
 
     printf("the old value of tx translation: %d\n", style->translation->x);

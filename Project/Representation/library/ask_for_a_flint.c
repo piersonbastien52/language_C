@@ -38,6 +38,7 @@ int ask_for_int(char *message)
         else
         {
             printf("wrong input\n");
+            clear_stdin();
         }
     }
 }
@@ -69,6 +70,11 @@ int ask_for_limited_int(char *message, int min, int max)
                 printf("wrong input\n");
             }
         }
+        else
+        {
+            clear_stdin();
+            printf("wrong input (letters are not allowed)\n");
+        }
     }
 }
 
@@ -96,6 +102,7 @@ float ask_for_limited_float(char *message, float min, float max)
             else
             {
                 printf("wrong input\n");
+                clear_stdin();
             }
         }
     }

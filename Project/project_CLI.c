@@ -57,7 +57,6 @@ void main_menu(Landmark_t **chain)
 {
     while (1)
     {
-        system("clear");
         int choice = ask_navigation(
             "--- SHAPE MANAGER ---\n"
             "1.Create a shape\n"
@@ -394,6 +393,6 @@ void delete_shape(Landmark_t *chain) // regarder si c'est possible de mettre une
 void loading(void)
 {
     system("clear");
-    printf("in developement");
+    printf("in developement\n");
     return;
 }

@@ -22,6 +22,16 @@ Un gestionnaire de formes géométriques en ligne de commande (CLI) développé 
 
 ---
 
+## Compiler et lancer 
+
+- **Compiler et lancer** :
+   - Ouvrir un terminal dans le dossier Project.
+   - Lancer le Makefile avec la commande make build. 
+   - Exécuter le fichier généré : ./Project
+   - Il est conseillé de sortir du programme depuis le menu principale/ 6.leave.
+
+---
+
 ## 📂 Architecture du Projet
 
 ```text
