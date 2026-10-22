@@ -19,9 +19,9 @@ int export_svg(Landmark_t *landmark)
         return -1;
     }
 
-    fprintf(file, "<svg viewBox=\"-1000 -1000 1000 1000\" xmlns=\"http://www.w3.org/2000/svg\">\n");
+    fprintf(file, "<svg viewBox=\"-1000 -1000 2000 2000\" xmlns=\"http://www.w3.org/2000/svg\">\n");
 
-        List_shape_t *current = landmark->start;
+    List_shape_t *current = landmark->start;
 
     while (current != NULL)
     {
@@ -51,17 +51,17 @@ int export_svg(Landmark_t *landmark)
             break;
 
         case FORM_CIRCLE:
-            fprintf(file, "<circle cx=\"%d\" cy=\"%d\" r=\"%d\"/\n", shape->data.circle->center->x, shape->data.circle->center->y, shape->data.circle->r);
+            fprintf(file, "<circle cx=\"%d\" cy=\"%d\" r=\"%d\"\n", shape->data.circle->center->x, shape->data.circle->center->y, shape->data.circle->r);
             fprintf(file, "stroke=\"%s\" fill=\"%s\" stroke-opacity=\"%f\" fill-opacity=\"%f\" stroke-width=\"%f\" transform=\"translate(%d,%d) rotate(%d)\"/>\n", shape->styles->stroke, shape->styles->fill, shape->styles->stroke_opacity, shape->styles->fill_opacity, shape->styles->stroke_width, shape->styles->translation->x, shape->styles->translation->y, shape->styles->angle);
             break;
 
         case FORM_ELLIPSE:
-            fprintf(file, "<ellipse cx=\"%d\" cy=\"%d\" rx=\"%d\" ry=\"%d\"/\n", shape->data.ellipse->center->x, shape->data.ellipse->center->y, shape->data.ellipse->rx, shape->data.ellipse->ry);
+            fprintf(file, "<ellipse cx=\"%d\" cy=\"%d\" rx=\"%d\" ry=\"%d\"\n", shape->data.ellipse->center->x, shape->data.ellipse->center->y, shape->data.ellipse->rx, shape->data.ellipse->ry);
             fprintf(file, "stroke=\"%s\" fill=\"%s\" stroke-opacity=\"%f\" fill-opacity=\"%f\" stroke-width=\"%f\" transform=\"translate(%d,%d) rotate(%d)\"/>\n", shape->styles->stroke, shape->styles->fill, shape->styles->stroke_opacity, shape->styles->fill_opacity, shape->styles->stroke_width, shape->styles->translation->x, shape->styles->translation->y, shape->styles->angle);
             break;
 
         case FORM_LINE:
-            fprintf(file, "<line x1=\"%d\" y1=\"%d\" x2=\"%d\" y2=\"%d\"/s\n", shape->data.line->point1->x, shape->data.line->point1->y, shape->data.line->point2->x, shape->data.line->point2->y);
+            fprintf(file, "<line x1=\"%d\" y1=\"%d\" x2=\"%d\" y2=\"%d\"\n", shape->data.line->point1->x, shape->data.line->point1->y, shape->data.line->point2->x, shape->data.line->point2->y);
             fprintf(file, "stroke=\"%s\" fill=\"%s\" stroke-opacity=\"%f\" fill-opacity=\"%f\" stroke-width=\"%f\" transform=\"translate(%d,%d) rotate(%d)\"/>\n", shape->styles->stroke, shape->styles->fill, shape->styles->stroke_opacity, shape->styles->fill_opacity, shape->styles->stroke_width, shape->styles->translation->x, shape->styles->translation->y, shape->styles->angle);
             break;
         }
