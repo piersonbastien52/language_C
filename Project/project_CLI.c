@@ -300,8 +300,14 @@ void visualize(Landmark_t *chain)
     }
     print_shapes_list(chain); // permet au user de voir la liste des formes contenu dans la liste chainée
 
-    int export_svg(Landmark_t * landmark);
-
+    if (export_svg(chain) == 0)
+    {
+        printf("Export SVG successfull 'file_name.svg' !\n");
+    }
+    else
+    {
+        printf("error during exporting SVG.\n");
+    }
     unsigned int index = ask_for_limited_int(
         "Which shape would you display ?\n",
         0,
