@@ -22,7 +22,7 @@
 
 void main_menu(Landmark_t **chain);
 void menu_create_shape(Landmark_t **chain);
-void editing(Landmark_t **chain);
+void editing(Landmark_t *chain);
 void loading(void); // non implémenté
 void visualize(Landmark_t *chain);
 void delete_shape(Landmark_t *chain);
@@ -55,42 +55,44 @@ int ask_navigation(char *menu, int min, int max)
 
 void main_menu(Landmark_t **chain)
 {
-    int choice = ask_navigation(
-        "--- SHAPE MANAGER ---"
-        "1.Create a shape\n"
-        "2.Editing\n"
-        "3.Loading\n"
-        "4.Visualize\n"
-        "5.Delete shape\n"
-        "6.Leave\n"
-        "Enter your choice (1-6): \n",
-        1, 6);
-
-    switch (choice)
+    while (1)
     {
-    case 1:
-        menu_create_shape(chain);
-        break;
-    case 2:
-        editing(*chain);
-        break;
-    case 3:
-        loading();
-        break;
-    case 4:
-        visualize(*chain);
-        break;
-    case 5:
-        delete_shape(*chain);
-        break;
-    case 6:
-        return;
-        break;
-    default:
-        printf("wrong input");
-        break;
+        int choice = ask_navigation(
+            "--- SHAPE MANAGER ---\n"
+            "1.Create a shape\n"
+            "2.Editing\n"
+            "3.Loading\n"
+            "4.Visualize\n"
+            "5.Delete shape\n"
+            "6.Leave\n"
+            "Enter your choice (1-6): \n",
+            1, 6);
+
+        switch (choice)
+        {
+        case 1:
+            menu_create_shape(chain);
+            break;
+        case 2:
+            editing(*chain);
+            break;
+        case 3:
+            loading();
+            break;
+        case 4:
+            visualize(*chain);
+            break;
+        case 5:
+            delete_shape(*chain);
+            break;
+        case 6:
+            return;
+            break;
+        default:
+            printf("wrong input");
+            break;
+        }
     }
-    return;
 }
 
 /**
@@ -101,7 +103,7 @@ void main_menu(Landmark_t **chain)
 void menu_create_shape(Landmark_t **chain)
 {
     int choice = ask_navigation(
-        "--- CHOOSE A SHAPE ---"
+        "--- CHOOSE A SHAPE ---\n"
         "1.Rectangle\n"
         "2.Square\n"
         "3.Circle\n"
@@ -111,6 +113,10 @@ void menu_create_shape(Landmark_t **chain)
         "Enter your choice (1-6): \n",
         1, 6);
 
+    if (choice == 6)
+    {
+        return;
+    }
     List_shape_t *new_node = malloc(sizeof(List_shape_t));
     if (new_node == NULL)
     {
@@ -158,10 +164,6 @@ void menu_create_shape(Landmark_t **chain)
         new_node->shape.styles = line_styles();
         break;
     }
-    case 6:
-    {
-        return;
-    }
     default:
         free(new_node);
         return;
@@ -177,10 +179,10 @@ void menu_create_shape(Landmark_t **chain)
  * @param chain Pointer to the Landmark_t linked list container.
  */
 
-void editing(Landmark_t **chain)
+void editing(Landmark_t *chain)
 {
     int choice = ask_navigation(
-        "--- MODIFYING ---"
+        "--- MODIFYING ---\n"
         "1.Modify coordonates\n"
         "2.modify styles (colors and angle)\n"
         "3.Return\n"
@@ -374,4 +376,9 @@ void delete_shape(Landmark_t *chain) // regarder si c'est possible de mettre une
     {
         printf("Error while deleting shape.\n");
     }
+}
+void loading(void)
+{
+    printf("in developement");
+    return;
 }

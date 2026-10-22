@@ -1,4 +1,3 @@
-#include "../Representation/generation.c"
 #include "../Representation/library/generation.h"
 #include <stdio.h>
 #include <string.h>
