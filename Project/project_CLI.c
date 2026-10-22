@@ -18,11 +18,12 @@
 #include "Representation/library/square.h"
 #include "Representation/library/enum.h"
 #include "Representation/library/generation.h"
+#include "Representation/library/All_shapes.h"
 
 void main_menu(Landmark_t **chain);
 void menu_create_shape(Landmark_t **chain);
 void editing(Landmark_t **chain);
-void loading(void); // ou à implémenter selon vos besoins
+void loading(void); // non implémenté
 void visualize(Landmark_t *chain);
 void delete_shape(Landmark_t *chain);
 void modify_coordonates(Landmark_t *chain);
@@ -313,27 +314,27 @@ void visualize(Landmark_t *chain)
     switch (shape->type)
     {
     case FORM_RECTANGLE:
-        print_rectangle(shape->data.rectangle);
+        print_rectangle(shape->data.rectangle, shape);
         print_style(shape->styles);
         break;
 
     case FORM_SQUARE:
-        print_square(shape->data.square);
+        print_square(shape->data.square, shape);
         print_style(shape->styles);
         break;
 
     case FORM_CIRCLE:
-        print_circle(shape->data.circle);
+        print_circle(shape->data.circle, shape);
         print_style(shape->styles);
         break;
 
     case FORM_ELLIPSE:
-        print_ellipse(shape->data.ellipse);
+        print_ellipse(shape->data.ellipse, shape);
         print_style(shape->styles);
         break;
 
     case FORM_LINE:
-        print_line(shape->data.line);
+        print_line(shape->data.line, shape);
         print_style(shape->styles);
         break;
     }
