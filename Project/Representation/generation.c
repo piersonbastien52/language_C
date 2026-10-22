@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include "generation.h"
+#include "library/generation.h"
 #include "enum.h"
 #include "library/styles.h"
 #include "library/rectangle.h"

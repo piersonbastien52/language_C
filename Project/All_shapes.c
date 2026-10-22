@@ -5,7 +5,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "All_shapes.h"
+#include "Representation/library/All_shapes.h"
 #include "Representation/library/Points.h"
 #include "Representation/library/apply_style.h"
 #include "Representation/library/color.h"

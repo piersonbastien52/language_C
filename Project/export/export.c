@@ -1,9 +1,9 @@
-#include "generation.h"
+#include "../Representation/generation.c"
 #include "enum.h"
 #include <stdio.h>
 #include <string.h>
 
-int export_svg(Landmark_t *landmark, const char *file_name)
+int export_svg(Landmark_t *landmark)
 
 {
     FILE *file = fopen("file_name.svg", "w");

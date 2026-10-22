@@ -4,7 +4,7 @@
  */
 
 #include <stdio.h>
-#include "export.h"
+#include "Project/export/export.h"
 #include "Representation/library/apply_style.h"
 #include "Representation/library/color.h"
 #include "Representation/library/ask_for_a_flint.h"
@@ -73,7 +73,7 @@ void main_menu(Landmark_t **chain)
         delete_shape(chain);
         break;
     case 6:
-        return 0;
+        return;
         break;
     default:
         printf("wrong input");
