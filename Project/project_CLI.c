@@ -19,6 +19,16 @@
 #include "Representation/library/enum.h"
 #include "Representation/library/generation.h"
 
+void main_menu(Landmark_t **chain);
+void menu_create_shape(Landmark_t **chain);
+void editing(Landmark_t **chain);
+void loading(void); // ou à implémenter selon vos besoins
+void visualize(Landmark_t *chain);
+void delete_shape(Landmark_t *chain);
+void modify_coordonates(Landmark_t *chain);
+void modify_styles_applied(Landmark_t *chain);
+void print_shapes_list(Landmark_t *chain);
+
 /**
  * @brief Main entry point of the CLI application.
  * @details Initializes the shape list container and launches the interactive main menu loop.
@@ -61,16 +71,16 @@ void main_menu(Landmark_t **chain)
         menu_create_shape(chain);
         break;
     case 2:
-        editing(chain);
+        editing(*chain);
         break;
     case 3:
         loading();
         break;
     case 4:
-        visualize(chain);
+        visualize(*chain);
         break;
     case 5:
-        delete_shape(chain);
+        delete_shape(*chain);
         break;
     case 6:
         return;

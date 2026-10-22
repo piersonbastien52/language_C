@@ -74,12 +74,12 @@ char *ask_color(char *message)
  * @return Pointer to newly allocated validated color string.
  */
 
-char *modify_color(char *old_color)
+char *modify_color(char *message, char *old_color)
 
 {
     printf("The old color is : %s", old_color);
     free(old_color);
-    return ask_color("What is the new color ?\n");
+    return ask_color(message);
 }
 
 /**

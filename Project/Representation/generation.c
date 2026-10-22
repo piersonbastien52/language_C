@@ -14,6 +14,8 @@
 #include "library/ellipse.h"
 #include "library/line.h"
 #include "library/square.h"
+#include "library/All_shapes.h"
+#include "library/apply_style.h"
 
 /**
  * @brief Appends a new node to the shape container list.
