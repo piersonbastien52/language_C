@@ -169,3 +169,25 @@ int supp_node(Landmark_t *chain, unsigned int index)
   chain->length--;
   return 1;
 }
+
+/**
+ * @brief Libère entièrement la liste chaînée et toutes les formes associées.
+ * @param chain Pointeur vers le conteneur Landmark_t.
+ */
+void free_landmark(Landmark_t *chain)
+{
+  if (chain == NULL)
+  {
+    return;
+  }
+
+  List_shape_t *current = chain->start;
+  while (current != NULL)
+  {
+    List_shape_t *next_node = current->next;
+    free_node(current); // Libère la forme, ses styles, ses sous-structures et le maillon
+    current = next_node;
+  }
+
+  free(chain); // Libère le conteneur principal de la liste
+}

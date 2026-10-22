@@ -57,6 +57,7 @@ void main_menu(Landmark_t **chain)
 {
     while (1)
     {
+        system("clear");
         int choice = ask_navigation(
             "--- SHAPE MANAGER ---\n"
             "1.Create a shape\n"
@@ -86,6 +87,7 @@ void main_menu(Landmark_t **chain)
             delete_shape(*chain);
             break;
         case 6:
+            free_landmark(*chain); // permet de free tout avant de partir !!
             return;
             break;
         default:
@@ -181,6 +183,7 @@ void menu_create_shape(Landmark_t **chain)
 
 void editing(Landmark_t *chain)
 {
+    system("clear");
     int choice = ask_navigation(
         "--- MODIFYING ---\n"
         "1.Modify coordonates\n"
@@ -216,6 +219,7 @@ void editing(Landmark_t *chain)
 void modify_coordonates(Landmark_t *chain)
 
 {
+    system("clear");
     if (chain == NULL || chain->start == NULL)
     {
         printf("No shape saved\n");
@@ -265,6 +269,7 @@ void modify_coordonates(Landmark_t *chain)
 
 void modify_styles_applied(Landmark_t *chain)
 {
+    system("clear");
     if (chain == NULL || chain->start == NULL)
     {
         printf("No shape saved\n");
@@ -358,6 +363,7 @@ void visualize(Landmark_t *chain)
 
 void delete_shape(Landmark_t *chain) // regarder si c'est possible de mettre une option leave sans forcément supprimer
 {
+    system("clear");
     if (chain == NULL || chain->start == NULL)
     {
         printf("No shape saved\n");
@@ -387,6 +393,7 @@ void delete_shape(Landmark_t *chain) // regarder si c'est possible de mettre une
 }
 void loading(void)
 {
+    system("clear");
     printf("in developement");
     return;
 }
