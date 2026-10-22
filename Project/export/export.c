@@ -5,7 +5,7 @@
 int export_svg(Landmark_t *landmark)
 
 {
-    FILE *file = fopen("file_name.svg", "w");
+    FILE *file = fopen("../file_name.svg", "w");
 
     if (file == NULL)
     {
