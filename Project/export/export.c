@@ -33,7 +33,7 @@ int export_svg(Landmark_t *landmark)
         }
         if (shape->styles == NULL)
         {
-            printf("Style non défini\n");
+            printf("non-defined styles\n");
             current = current->next;
             continue;
         }
