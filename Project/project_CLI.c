@@ -308,11 +308,11 @@ void modify_styles_applied(Landmark_t *chain)
         {
         case 1:
         {
-            modify_style_filling(current->shape.styles->fill);
+            modify_style_filling(current->shape.styles);
         }
         case 2:
         {
-            modify_style_stroke(current->shape.styles->stroke);
+            modify_style_stroke(current->shape.styles);
         }
         case 3:
         {
@@ -328,11 +328,11 @@ void modify_styles_applied(Landmark_t *chain)
         }
         case 6:
         {
-            modify_style_angle(current->shape.styles->angle);
+            modify_style_angle(current->shape.styles);
         }
         case 7:
         {
-            modify_style_translation(current->shape.styles->translation);
+            modify_style_translation(current->shape.styles);
         }
         case 8:
         {
