@@ -131,6 +131,8 @@ void menu_create_shape(Landmark_t **chain)
     new_node->next = NULL;
     new_node->previous = NULL;
 
+    system("clear");
+
     switch (choice)
     {
     case 1:
@@ -309,30 +311,37 @@ void modify_styles_applied(Landmark_t *chain)
         case 1:
         {
             modify_style_filling(current->shape.styles);
+            break;
         }
         case 2:
         {
             modify_style_stroke(current->shape.styles);
+            break;
         }
         case 3:
         {
             modify_style_stroke_opacity(current->shape.styles);
+            break;
         }
         case 4:
         {
             modify_style_filling_opacity(current->shape.styles);
+            break;
         }
         case 5:
         {
             modify_style_stroke_width(current->shape.styles);
+            break;
         }
         case 6:
         {
             modify_style_angle(current->shape.styles);
+            break;
         }
         case 7:
         {
             modify_style_translation(current->shape.styles);
+            break;
         }
         case 8:
         {
