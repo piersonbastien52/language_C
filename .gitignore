@@ -1,0 +1,11 @@
+.DS_Store
+Thumbs.db
+*.swp
+*~
+*.bak
+*.tmp
+.vscode
+*.svg
+*.bin
+*.o
+Project
