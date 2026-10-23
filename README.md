@@ -33,6 +33,8 @@ Supported Shapes:
 
 ## Project architecture
 
+```text
+
 Project/
 │
 ├── All_shapes.c                # Shape implementation (creation, editing, display, deletion)
