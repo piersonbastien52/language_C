@@ -45,33 +45,52 @@ void create_style(Styles_t *style)
  * @param style Pointer to the Styles_t structure to modify.
  */
 
-void modify_style(Styles_t *style) // si j'ai le temps je découperai en plusieurs fonction pour le moment non
+void modify_style_filling(Styles_t *style)
 {
     printf("the filling color is : %s\n", style->fill);
     free(style->fill);
     style->fill = ask_color("what is the new filling color ?\n");
     printf("the new filling color is : %s\n", style->fill);
+}
 
+void modify_style_stroke(Styles_t *style)
+{
     printf("the stroke color is : %s\n", style->stroke);
     free(style->stroke);
     style->stroke = ask_color("what is the new stroke color ?\n");
     printf("the new stroke color is : %s\n", style->stroke);
+}
 
+void modify_style_stroke_opacity(Styles_t *style)
+{
     printf("the stroke opacity is : %f\n", style->stroke_opacity);
     style->stroke_opacity = ask_for_limited_float("what is the new stroke opacity (0 to 1) ?\n", 0, 1);
     printf("the new stroke opacity is : %f\n", style->stroke_opacity);
+}
+
+void modify_style_filling_opacity(Styles_t *style)
+{
     printf("the filling opacity is : %f\n", style->fill_opacity);
     style->fill_opacity = ask_for_limited_float("what is the new filling opacity (0 to 1) ?\n", 0, 1);
     printf("the new filling opacity is : %f\n", style->fill_opacity);
+}
 
+void modify_style_stroke_width(Styles_t *style)
+{
     printf("the stroke width is : %f\n", style->stroke_width);
     style->stroke_width = ask_for_limited_float("what is the new stroke width (0 to 1) ?\n", 0, 1);
     printf("the new stroke width is: %f\n", style->stroke_width);
+}
 
+void modify_style_angle(Styles_t *style)
+{
     printf("the applied angle is : %d\n", style->angle);
     style->angle = ask_for_limited_int("enter a new angle? (-360 to 360)", -360, 360);
     printf("the new applied angle is : %d\n", style->angle);
+}
 
+void modify_style_translation(Styles_t *style)
+{
     printf("the old value of tx translation: %d\n", style->translation->x);
     printf("the old value of ty translation: %d\n", style->translation->y);
     style->translation->x = ask_for_int("what is the new value of tx ?\n");

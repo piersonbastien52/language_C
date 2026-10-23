@@ -289,8 +289,62 @@ void modify_styles_applied(Landmark_t *chain)
     {
         current = current->next;
     }
+    while (1)
+    {
+        int choice = ask_navigation(
+            "--- MODIFYING STYLES---\n"
+            "1. Filling color\n"
+            "2. Stroke color\n"
+            "3. Stroke opacity\n"
+            "4. Filling opacity\n"
+            "5. Stroke width\n"
+            "6. Angle\n"
+            "7. Translation\n"
+            "8.🔙 Return\n"
+            "Enter your choice (1-8): \n",
+            1, 8);
 
-    modify_style(current->shape.styles);
+        switch (choice)
+        {
+        case 1:
+        {
+            modify_style_filling(current->shape.styles->fill);
+        }
+        case 2:
+        {
+            modify_style_stroke(current->shape.styles->stroke);
+        }
+        case 3:
+        {
+            modify_style_stroke_opacity(current->shape.styles);
+        }
+        case 4:
+        {
+            modify_style_filling_opacity(current->shape.styles);
+        }
+        case 5:
+        {
+            modify_style_stroke_width(current->shape.styles);
+        }
+        case 6:
+        {
+            modify_style_angle(current->shape.styles->angle);
+        }
+        case 7:
+        {
+            modify_style_translation(current->shape.styles->translation);
+        }
+        case 8:
+        {
+            return;
+        }
+        default:
+        {
+            printf("wrong input");
+            break;
+        }
+        }
+    }
 }
 
 /**
