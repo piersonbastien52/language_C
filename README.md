@@ -1,56 +1,54 @@
-# 📐 Shape Manager CLI (C Project)
+# Shape Manager CLI (C Project)
 
-Un gestionnaire de formes géométriques en ligne de commande (CLI) développé en **Langage C (C99)**. Ce programme permet de créer, modifier, visualiser, supprimer et exporter des formes géométriques vectorielles au format SVG.
-
----
-
-## 🚀 Fonctionnalités
-
-- **Formes supportées** :
-  - Rectangle (origine, hauteur, largeur)
-  - Carré (origine, hauteur)
-  - Cercle (centre, rayon)
-  - Ellipse (centre, rayon horizontal, rayon vertical)
-  - Ligne (deux points de coordonnées)
-- **Gestion des Styles** :
-  - Couleurs de remplissage et de contour personnalisables (format hexadécimal `#RRGGBB`).
-  - Opacités réglables pour le contour et le remplissage.
-  - Épaisseur de trait paramétrable.
-  - Transformations géométriques (Vecteur de translation `tx, ty` et angle de rotation).
-- **Structure de Données** : Implémentation d'une liste chaînée doublement chaînée (`Landmark_t` / `List_shape_t`) pour gérer dynamiquement la collection de formes.
-- **Exportation** : Génération d'un fichier de sortie au format **SVG** pour visualiser graphiquement les créations.
+A command-line shape manager (CLI) developed in C (C99). This program allows users to create, edit, display, delete, and export geometric shapes in SVG format.
 
 ---
 
-## Compiler et lancer 
+##  Features
 
-- **Compiler et lancer** :
-   - Ouvrir un terminal dans le dossier Project.
-   - Lancer le Makefile avec la commande make build. 
-   - Exécuter le fichier généré : ./Project
-   - Il est conseillé de sortir du programme depuis le menu principale/ 6.leave.
+Supported Shapes:
+
+- Rectangle (origin, height, width)
+- Square (origin, side length)
+- Circle (center, radius)
+- Ellipse (center, horizontal radius, vertical radius)
+- Line (defined by two coordinate points)
+
+## Style Management:
+
+- Fill and stroke colors (hexadecimal format #RRGGBB).
+- Adjustable fill and stroke opacity.
+- Stroke width customization.
+- Geometric transformations (translation tx, ty and rotation angle).
+
+## Data Structure:
+
+- Linked list implementation for dynamically managing the collection of shapes.
+
+## Exporting:
+
+- Generation of an SVG output file to visually render created shapes.
 
 ---
 
-## 📂 Architecture du Projet
+## Project architecture
 
-```text
 Project/
 │
-├── All_shapes.c                # Implémentation des formes (création, modification, affichage, suppression)
-├── project_CLI.c               # Point d'entrée principal et gestion des menus de la CLI
-├── Makefile                    # Fichier d'automatisation de la compilation
+├── All_shapes.c                # Shape implementation (creation, editing, display, deletion)
+├── project_CLI.c               # Main entry point and CLI menu management
+├── Makefile                    # Build automation file
 │
 ├── CLI/
-│   └── CLI_library.c           # Fonctions utilitaires d'affichage et de navigation CLI
+│   └── CLI_library.c           # Utility functions for CLI display and navigation
 │
 ├── export/
-│   ├── export.c                # Logique d'exportation au format SVG
-│   └── export.h                # En-tête pour l'export SVG
+│   ├── export.c                # SVG export logic
+│   └── export.h                # SVG export header
 │
 └── Representation/
-    ├── generation.c            # Gestion de la liste chaînée et désallocation mémoire
-    └── library/                # Fichiers d'en-tête et sous-modules (structures, styles, points, etc.)
+    ├── generation.c            # Linked list management and memory deallocation
+    └── library/                # Header files and submodules (structures, styles, points, etc.)
         ├── All_shapes.h
         ├── apply_style.h
         ├── circle.h
