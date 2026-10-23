@@ -432,7 +432,7 @@ void visualize(Landmark_t *chain)
  * @param chain Pointer to the Landmark_t linked list container.
  */
 
-void delete_shape(Landmark_t *chain) // regarder si c'est possible de mettre une option leave sans forcément supprimer
+void delete_shape(Landmark_t *chain)
 {
     system("clear");
     if (chain == NULL || chain->start == NULL)
