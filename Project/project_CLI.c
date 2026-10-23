@@ -55,16 +55,17 @@ int ask_navigation(char *menu, int min, int max)
 
 void main_menu(Landmark_t **chain)
 {
+    system("clear");
     while (1)
     {
         int choice = ask_navigation(
             "--- SHAPE MANAGER ---\n"
-            "1.Create a shape\n"
-            "2.Editing\n"
-            "3.Loading\n"
-            "4.Visualize\n"
-            "5.Delete shape\n"
-            "6.Leave\n"
+            "1.💾 Create a shape\n"
+            "2.🖊 Editing\n"
+            "3.📁 Loading\n"
+            "4.👁️‍🗨️ Visualize\n"
+            "5.⬅ Delete shape\n"
+            "6.❌ Leave\n"
             "Enter your choice (1-6): \n",
             1, 6);
 
@@ -103,14 +104,16 @@ void main_menu(Landmark_t **chain)
 
 void menu_create_shape(Landmark_t **chain)
 {
+
+    system("clear");
     int choice = ask_navigation(
         "--- CHOOSE A SHAPE ---\n"
-        "1.Rectangle\n"
-        "2.Square\n"
-        "3.Circle\n"
-        "4.Ellipse\n"
-        "5.Line\n"
-        "6.Return\n"
+        "1.🔳 Rectangle\n"
+        "2.◾ Square\n"
+        "3.⚪ Circle\n"
+        "4.⭕ Ellipse\n"
+        "5.📏 Line\n"
+        "6.🔙 Return\n"
         "Enter your choice (1-6): \n",
         1, 6);
 
@@ -185,9 +188,9 @@ void editing(Landmark_t *chain)
     system("clear");
     int choice = ask_navigation(
         "--- MODIFYING ---\n"
-        "1.Modify coordonates\n"
-        "2.modify styles (colors and angle)\n"
-        "3.Return\n"
+        "1.➰ Modify coordonates\n"
+        "2.➿ modify styles (colors and angle)\n"
+        "3.🔙 Return\n"
         "Enter your choice (1-3): \n",
         1, 3);
 
@@ -297,6 +300,7 @@ void modify_styles_applied(Landmark_t *chain)
 
 void visualize(Landmark_t *chain)
 {
+    system("clear");
     if (chain == NULL || chain->start == NULL)
     {
         printf("No shape saved\n");
@@ -331,26 +335,31 @@ void visualize(Landmark_t *chain)
     case FORM_RECTANGLE:
         print_rectangle(shape->data.rectangle, shape);
         print_style(shape->styles);
+        system("sleep 5");
         break;
 
     case FORM_SQUARE:
         print_square(shape->data.square, shape);
         print_style(shape->styles);
+        system("sleep 5");
         break;
 
     case FORM_CIRCLE:
         print_circle(shape->data.circle, shape);
         print_style(shape->styles);
+        system("sleep 5");
         break;
 
     case FORM_ELLIPSE:
         print_ellipse(shape->data.ellipse, shape);
         print_style(shape->styles);
+        system("sleep 5");
         break;
 
     case FORM_LINE:
         print_line(shape->data.line, shape);
         print_style(shape->styles);
+        system("sleep 5");
         break;
     }
 }

@@ -1,7 +1,17 @@
+/**
+ * @file export.c
+ * @brief fonction to export shapes on svg file.
+ */
+
 #include "../Representation/library/generation.h"
 #include <stdio.h>
 #include <string.h>
 #include "export.h"
+
+/**
+ * @brief Export data to the svg file
+ * @param landmark enumeration of the stored shapes.
+ */
 
 int export_svg(Landmark_t *landmark)
 {
